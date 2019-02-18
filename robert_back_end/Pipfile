@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+
+[packages]
+django = "==2.1.7"
+stripe = "*"
+django-crispy-forms = "*"
+libsass = "*"
+django-sass-processor = "*"
+gunicorn = "==19.9.0"
+psycopg2-binary = "*"
+coverage = "*"
+selenium = "*"
+
+
+[requires]
+python_version = "3.7"

@@ -1,0 +1,124 @@
+.wrapper-order {
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin-bottom: 1vw;
+  text-align: center;
+}
+
+.cal-ico {
+  text-align: center;
+  grid-column: 6/8;
+  grid-row: 3;
+  margin-bottom: 0.5vw;
+  svg {
+    max-height : 4vw;
+  }
+}
+
+#cal-month {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+}
+
+#cal-day {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+#ban-title{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: calc(8px + 1.2vw);
+  grid-column: 2/12;
+  grid-row: 1;
+}
+
+#text-order {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: calc(8px + 1.4vw);
+  grid-column: 2/12;
+  grid-row: 2/3;
+}
+
+#text-order2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: calc(5px + 0.6vw);
+  grid-column: 9/13;
+  grid-row: 1/3;
+  text-align: right;
+  margin:0.3vw;
+}
+
+#total-order-container {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: calc(5px + 0.6vw);
+  grid-row: 1/4;
+  grid-column: 1/6;
+  text-align: left;
+  align-self: flex-end;
+  margin-bottom: 0.3vw;
+  margin-left: 0.3vw;
+}
+
+.check-order-group {
+  grid-column: 8/13;
+  grid-row-start: 3;
+  position: relative;
+  margin-right: 1vw;
+}
+
+#reset {
+  font-size: calc(6px + 0.8vw);
+  font-weight: 100;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 2vw;
+  right: 4.1vw;
+}
+
+#text-confirm-order {
+  position: absolute;
+  bottom: 0;
+  right: 4.5vw;
+  font-size: calc(7px + 1vw);
+  font-weight: 500;
+}
+
+#check-order {
+  position: absolute;
+  right: 0.1vw;
+  bottom: 0.1vw;
+  box-sizing: border-box;
+  svg {
+    min-width: 3.5vw;
+    margin-bottom: 0.1vw;
+    cursor: pointer;
+    max-width: 3.5vw;
+  }
+  div {
+    position: absolute;
+    top: 0.65vw;
+    left: 0.55vw;
+  }
+}
+
+.hide-order, .checkBox-hide {
+  visibility: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+  #reset {
+    bottom: 3vw;
+  }
+  #check-order div {
+    top: 2.1vw;
+  }
+}

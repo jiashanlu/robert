@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  back_end_django:
+    build: ./robert_back_end
+    # command: gunicorn --bind :8000 robert.wsgi:application
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    # networks:  # <-- here
+    #   - nginx_network
+    #   - db_network
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
+  front_end_react:
+    build: ./robert_front_end
+    volumes:
+      - .:/code
+    ports:
+      - 3000:3000
+    # networks:  # <-- here
+    #   - nginx_network
+    #   - db_network
+    # stdin_open: true
+    # tty: true
+  # nginx:
+  #   image: nginx:1.13
+  #   ports:
+  #     - 8000:80
+  #   volumes:
+  #     - ./config/nginx/conf.d:/etc/nginx/conf.d
+  #   depends_on:  # <-- wait for djangoapp to be "ready" before starting this service
+  #     - back_end_django
+  #   networks:  # <-- here
+  #     - nginx_network
+
+  db:
+    image: postgres:10.1-alpine
+    # networks:  # <-- connect to the bridge
+    #   - db_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+# networks:  # <-- and here
+#   nginx_network:
+#     driver: bridge
+#   db_network:  # <-- add the bridge
+#     driver: bridge
+
+volumes:
+  postgres_data:
+# python /code/manage.py runserver 0.0.0.0:8000

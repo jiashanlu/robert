@@ -1,0 +1,44 @@
+{% load static %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'order' %}">
+    <img src="{% static 'orders/img/exit.svg' %}" width="30" height="30" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav nav-tabs mr-auto" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true" onclick=" (document.location.hash === '#log') ? document.location.href = '{% url 'account' %}#profile' : false">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="delivery-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="delivery" aria-selected="false" onclick=" (document.location.hash === '#log') ? document.location.href = '{% url 'account' %}#delivery' : false">Preferences</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="AO-tab" data-toggle="tab" href="#AO" role="tab" aria-controls="AO" aria-selected="false" onclick=" (document.location.hash === '#log') ? document.location.href = '{% url 'account' %}#AO' : false">Auto Order</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false" onclick=" (document.location.hash === '#log') ? document.location.href = '{% url 'account' %}#orders' : false">History</a>
+      </li>
+    </ul>
+    <span class="navbar-text mr-sm-2">
+    <span>Back to Order   <i class="fas fa-arrow-right"></i></span>
+      <a class="navbar-brand" href="{% url 'order' %}">
+        <img src="{% static 'orders/img/icon-baguette.svg' %}" width="30" height="30" alt="">
+        <img src="{% static 'orders/img/icon-croissant.svg' %}" width="30" height="30" alt="">
+        <img src="{% static 'orders/img/icon-special.svg' %}" width="30" height="30" alt="">
+
+      </a>
+   </span>
+  </div>
+</nav>
+
+<!-- <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+
+      document.querySelector("#profile-tab").onclick = function() {
+
+      }
+  })
+</script> -->

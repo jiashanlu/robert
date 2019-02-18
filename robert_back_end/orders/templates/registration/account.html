@@ -1,0 +1,52 @@
+{% extends "orders/base-wo.html" %}{% load static %}
+{% block title %}
+    Robert - Account
+{% endblock %}
+{% block ext2 %}
+<script src="https://checkout.stripe.com/checkout.js"></script>
+{% endblock %}
+<meta>
+  <p id="coordinates">{{user.address.coordinates}}</p>
+</meta>
+
+
+{% block content %}
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+    <div class="account-title">
+      <p class="small-text">This is your default values. Feel free to update them...</p>
+    </div>
+    {% include 'registration/delivery-details.html' %}
+    <div class="update-delivery-details">
+      <input type="hidden" id="geocode" name="geocode" value="" form="main-form" />
+      <br>
+      <input type="button" id="upadte details" class="btn btn-lg btn-primary" value="Update" form="main-form">
+    </div>
+  </div>
+
+  <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="account-title">
+      <p class="small-text">Your profile!</p>
+    </div>
+    {% include 'registration/profile.html' %}
+  </div>
+
+  <div class="tab-pane fade" id="AO" role="tabpanel" aria-labelledby="AO-tab">
+    <div class="account-title">
+      <p class="small-text">Manage your Auto-Order</p>
+    </div>
+    {% include 'registration/AO.html' %}
+  </div>
+
+  <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+    <div class="account-title">
+      <p class="small-text">consult your order history!</p>
+    </div>
+    {% include 'registration/order-history.html' %}
+  </div>
+</div>
+
+
+
+{% endblock %}

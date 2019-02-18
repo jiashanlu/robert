@@ -1,0 +1,261 @@
+hr{
+  width : 75%;
+  grid-column: 1/4;
+}
+.news{
+  position: fixed;
+  left : 10px;
+  top : 35px;
+  font-weight: 900;
+  font-size:calc(8px + 1.2vw);
+  color: #4FB98E;
+  animation: hide 0s ease-in 5s forwards;
+}
+.icon-menu{
+  padding: 1vw;
+  border-right: 0.75px solid #4FB98E;
+  display: flex;
+}
+.icon-menu img {
+  max-height: 5vw;
+  align-self:center;
+  margin-left: 1vw;
+}
+.icon-menu span {
+  align-self:center;
+  margin: auto;
+  font-weight: 300;
+  font-style: italic;
+  font-size:calc(12px + 1.8vw);
+}
+
+.calendar-place{
+  grid-column: 1/2;
+  padding-left: 6vw !important;
+  padding-right: 6vw !important;
+}
+.wrapper-menu{
+  grid-row-start: 3;
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: repeat(3 , 1fr);
+  grid-auto-flow: dense;
+  padding-bottom: 2vw;
+  box-sizing: content-box;
+}
+.confirm-order{
+  grid-row-start: 3;
+  grid-column: 1/4;
+  margin: auto;
+  text-align: center;
+}
+
+.item-container{
+  border-right: 0.75px solid #4FB98E;
+  box-sizing: border-box;
+  padding-bottom: 2vw;
+}
+.item{
+  min-height: 4vw;
+  border: 0.05vw solid #4FB98E;
+  box-sizing: border-box;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  display: grid;
+  grid-template-columns: repeat(7 , 1fr);
+  position: relative;
+  grid-column-gap: 1vw;
+}
+.name{
+  grid-column: 1/3;
+  grid-row-start: 1;
+  font-weight: 700;
+  font-size:calc(5px + 1vw);
+  position: absolute;
+  left: 3px;
+}
+.price{
+  grid-column: 1/3;
+  grid-row-start: 3;
+  font-weight: 500;
+  font-size:calc(4px + 0.8vw);
+  position: absolute;
+  bottom: 0;
+  left: 3px;
+}
+.photo{
+  padding: 0.15vw;
+  grid-column: 5/8;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  text-align: right;
+}
+.photo img{
+  max-width: 100%;
+}
+.addremove{
+  color: #4FB98E;
+  margin: auto;
+  font-size:calc(10px + 0.8vw);
+  font-weight: 900;
+  background:none;
+  border:none;
+  cursor: pointer;
+}
+.plus{
+  grid-column: 4/5;
+  grid-row-start: 1;
+  line-height: 1vw;
+}
+.qty{
+  grid-column: 4/5;
+  grid-row-start: 2;
+  margin: auto;
+  font-weight: 500;
+  line-height: 1vw;
+  font-size:calc(6px + 0.9vw);
+
+}
+.minus{
+  grid-column: 4/5;
+  grid-row-start: 3;
+  line-height: 1vw;
+
+}
+.Baguette{
+  grid-column-start: 1;
+}
+.Croissant{
+  grid-column-start: 2;
+}
+.Special{
+  grid-column-start: 3;
+}
+.wrapper-ro{
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: repeat(6 , 1fr);
+}
+.ao-button-container{
+  text-align: center;
+  grid-column: 2/6;
+  grid-row-start: 1;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.poly-left{
+  animation: rotateOutUpLeft 1s;
+  grid-row-start: 1;
+  grid-column: 1/2;
+  animation-play-state: paused;
+}
+.poly-right{
+  grid-column: 6/7;
+  grid-row-start: 1;
+  animation: rotateOutUpRight 1s;
+  animation-play-state: paused;
+}
+.text-memb{
+  margin: auto;
+}
+.memb{
+  text-align: center;
+}
+.memb >img{
+  margin: auto;
+  max-height: 8vw;
+  margin-top: 3vw;
+  margin-bottom: 1vw;
+}
+.text-memb-perc{
+  margin: auto;
+  margin-top: 2vw;
+  margin-bottom: 3vw;
+  font-size:calc(20px + 3vw);
+  font-weight: 700;
+}
+$ratio: 0.7;
+.switch {
+  margin-top: 1vw;
+  align-self: center;
+  position: relative;
+  display: inline-block;
+  width: 10vw * $ratio;
+  height: 5.67vw * $ratio;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #BC2D19;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 4.33vw * $ratio;
+  width: 4.33vw * $ratio;
+  left: 0.67vw * $ratio;
+  bottom: 0.67vw * $ratio;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #4FB98E;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #4FB98E;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(4.33vw * $ratio);
+  -ms-transform: translateX(4.33vw * $ratio);
+  transform: translateX(4.33vw * $ratio);
+}
+.slider.round {
+  border-radius: 5.67vw * $ratio;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 600px){
+  .icon-menu{
+    display: none;
+  }
+  .Baguette{
+    grid-row-start: auto;
+    grid-column: 1/4;
+  }
+  .Croissant{
+    grid-row-start: auto;
+    grid-column: 1/4;
+  }
+  .Special{
+    grid-row-start: auto;
+    grid-column: 1/4;
+  }
+  .photo img{
+    max-width: 60%;
+  }
+}
+@keyframes hide {
+    to {
+        visibility:hidden;
+    }
+}

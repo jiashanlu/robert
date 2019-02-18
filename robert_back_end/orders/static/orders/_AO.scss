@@ -1,0 +1,42 @@
+#datepicker{
+  grid-column: 1/4;
+  margin:auto;
+  min-width: 50vw;
+  text-align: center!important;
+  font-size: 1.5vw !important;
+  display:inline-block;
+  div{
+    margin:auto;
+  }
+}
+
+.center{
+  grid-row-start: -1;
+  grid-column: 1/4;
+  margin:auto;
+  margin-bottom: 2vw;
+}
+.up{
+  grid-row-start: -1;
+}
+.default-item{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.button-block{
+  grid-column: 3/4;
+  text-align: right;
+  span{
+    font-size:calc(10px + 0.8vw);
+    line-height: 1vw;
+  }
+}
+.AO-buttons{
+  color: #4FB98E;
+  font-size:calc(10px + 0.8vw);
+  font-weight: 900;
+  background:none;
+  border:none;
+  cursor: pointer;
+  line-height: 1vw;
+}

@@ -1,0 +1,32 @@
+.form {
+  padding: 1vw;
+  margin: 1vw;
+}
+
+.form-title {
+  font-size: calc(12px + 2vw);
+  grid-column: 1/4;
+
+}
+
+.signup {
+  grid-column: 2/4;
+}
+
+.asteriskField {
+  display: none;
+}
+
+.message {
+  grid-column: 1/4;
+}
+
+.login-card {
+  grid-column: 1/2;
+  grid-row-start: 3;
+}
+
+.signup {
+  grid-column: 2/4;
+  grid-row-start: 3;
+}

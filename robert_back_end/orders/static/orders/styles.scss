@@ -1,0 +1,147 @@
+@import 'order';
+@import 'animate';
+@import 'account';
+@import 'index';
+@import 'order-banner';
+@import 'registration';
+@import 'profile';
+@import 'AO';
+
+
+#order-banner-td{
+  grid-column:1/4;
+}
+Html{
+  /* height: 100%; */
+  color: #112F41;
+}
+body{
+  font-family: 'Roboto', sans-serif !important;
+  color: #112F41 !important;
+  margin: auto !important;
+  display: flex;
+  flex-direction:column;
+  min-height: 100vh;
+}
+.big-text{
+  font-weight: 700;
+  font-size:calc(16px + 2vw);
+}
+.medium-text{
+  font-weight: 500;
+  font-size:calc(12px + 1.5vw);
+}
+.small-text{
+  font-weight: 300;
+  font-size:calc(8px + 1.2vw);
+}
+.vsmall-text{
+  font-weight: 300;
+  font-size:calc(7px + 0.8vw);
+}
+.separate {
+  grid-column:1/4;
+  height: 1px;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #4FB98E, rgba(0, 0, 0, 0));
+  width: 100%;
+}
+.wrapper{
+  grid-column:1/4;
+  display: grid;
+  color: #112F41;
+  grid-template-columns: repeat(3 , 1fr);
+  font-family: 'Roboto', sans-serif;
+}
+.wrap-head{
+  display: grid;
+  color: #112F41;
+  grid-template-columns: repeat(12 , 1fr);
+  font-family: 'Roboto', sans-serif;
+}
+.user-area{
+  position: absolute;
+  left: 2vw;
+}
+.logo-full{
+  animation: pulse 0s;
+  animation: reduce-logo;
+  text-align: right;
+  max-width: 15%;
+}
+.header{
+  padding: 1vw;
+  grid-column:1/12;
+  grid-row: 1/2;
+  text-align: right !important;
+}
+.sign{
+  position: fixed;
+  z-index: 998;
+  right: 1vw;
+  top: 1vw;
+}
+.bottom{
+  background-color: #112F41;
+  grid-column: 1/4;
+  padding-top: 0.5vw;
+  margin-top: 1vw;
+  display: grid;
+}
+.logo-btm{
+  grid-column: 1/4;
+  margin: 0 auto;
+  max-width: 20%;
+  min-width: 30px;
+}
+.app-link{
+  grid-column: 1/4;
+  text-align: center;
+}
+.app-link >img{
+  max-width: 8vw;
+  margin: 1vw;
+}
+.wrapper-bottom{
+  margin-top:auto;
+  flex: 0 0 50px;
+  }
+#order-banner{
+  visibility: hidden;
+  grid-column: 1/4;
+}
+@media (min-aspect-ratio: 16/9){
+  .main-page{
+    max-width: 90% !important;
+  }
+  .logo-full{
+    /* margin-right: 12vw; */
+  }
+  .header{
+    margin-right: 0vw !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .header button{
+    font-size: 6pt !important;
+  }
+  .header{
+    margin-bottom: 2vw;
+  }
+
+}
+@keyframes reduce-logo {
+  0% {
+    max-width: 35%;
+  }
+  100% {
+    max-width: 15%;
+  }
+}
+.pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+    background-image: none !important;
+    height: 0px;
+}
