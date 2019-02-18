@@ -14,4 +14,4 @@ services:
   - docker
 
 script:
-  - docker-compose run back_end_django test
+  - docker-compose -f docker-compose-travis.yml run back_end_django test

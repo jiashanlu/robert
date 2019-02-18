@@ -5,5 +5,5 @@ COPY . /code/robert_front_end/
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 3000 35729
 CMD ["npm", "start"]

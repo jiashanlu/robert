@@ -16,17 +16,17 @@ services:
     stdin_open: true
     tty: true
 
-  # front_end_react:
-  #   build: ./robert_front_end
-  #   volumes:
-  #     - .:/code
-  #   ports:
-  #     - 3000:3000
-  # networks:  # <-- here
-  #   - nginx_network
-  #   - db_network
-  # stdin_open: true
-  # tty: true
+  front_end_react:
+    build: ./robert_front_end
+    volumes:
+      - .:/code
+    ports:
+      - 3000:3000
+    # networks:  # <-- here
+    #   - nginx_network
+    #   - db_network
+    # stdin_open: true
+    # tty: true
   # nginx:
   #   image: nginx:1.13
   #   ports:
