@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
 import {
   HashRouter as Router,
   Route,
@@ -8,15 +7,17 @@ import {
 } from "react-router-dom";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import Header from "./components/layout/Header";
-import Dashboard from "./components/leads/Dashboard";
-import Alerts from "./components/layout/Alerts";
-import Login from "./components/accounts/Login";
-import Register from "./components/accounts/Register";
-import PrivateRoute from "./components/common/PrivateRoute";
+import { loadUser } from "./actions/auth";
+
+// import Register from "./accounts/Register";
+// import PrivateRoute from "./common/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./store";
-import { loadUser } from "./actions/auth";
+import Footer from "./components/layout/Footer";
+import Landing from "./components/layout/index/Landing";
+import Alerts from "./components/layout/Alerts";
+import Header from "./components/layout/Header";
+import Registration from "./components/accounts/Registration";
 
 // Alert Options
 const alertOptions = {
@@ -35,15 +36,15 @@ class App extends Component {
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
             <Fragment>
-              <Header />
               <Alerts />
-              <div className="container">
+              <Header />
+              <div className="container-fluid main wrapper-3">
                 <Switch>
-                  <PrivateRoute exact path="/" component={Dashboard} />
-                  <Route exact path="/register" component={Register} />
-                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/" component={Landing} />
+                  <Route exact path="/login" component={Registration} />
                 </Switch>
               </div>
+              <Footer />
             </Fragment>
           </Router>
         </AlertProvider>

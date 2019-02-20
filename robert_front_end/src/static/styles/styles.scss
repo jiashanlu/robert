@@ -1,0 +1,35 @@
+@import "variables";
+@import "Header";
+@import "Footer";
+@import "LandingTop";
+@import "IndexForm";
+@import "Carousel";
+@import "Registration";
+
+// WRAPPER CSS-GRID
+.wrapper-3 {
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.wrapper-12 {
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+// WRAPPER CSS-GRID
+
+body {
+  color: $rb-blue !important;
+  margin: auto !important;
+}
+.body-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  max-width: 1800px;
+}

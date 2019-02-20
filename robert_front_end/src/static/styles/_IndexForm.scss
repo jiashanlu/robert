@@ -1,0 +1,14 @@
+.form-post {
+  grid-column: 1/5;
+  grid-row: 3/5;
+}
+
+.btn-success {
+  background-color: $rb-green !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-post {
+    grid-column: 1/6;
+  }
+}

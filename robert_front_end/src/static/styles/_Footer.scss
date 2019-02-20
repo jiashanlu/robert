@@ -1,0 +1,23 @@
+.wrapper-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: auto;
+  flex: 0 0 50px;
+  background-color: #112f41;
+}
+.logo-btm {
+  grid-column: 1/4;
+  margin: 0 auto;
+  max-width: 20%;
+  min-width: 30px;
+  margin-top: 1vw;
+}
+.app-link {
+  grid-column: 1/4;
+  text-align: center;
+  img {
+    max-width: 12vw;
+    width: auto;
+    margin: 1vw;
+  }
+}
