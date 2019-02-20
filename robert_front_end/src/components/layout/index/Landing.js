@@ -6,7 +6,7 @@ import { newPath } from "../../../actions/path";
 
 export class Landing extends Component {
   componentDidMount() {
-    this.props.newPath(this.props.location.pathname);
+    this.props.newPath(this.props.location.pathname); // set path state
   }
 
   render() {
