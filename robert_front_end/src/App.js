@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import theme from "./components/Common/Theme";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Redirect
@@ -8,16 +10,17 @@ import {
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { loadUser } from "./actions/auth";
+import { getItems } from "./actions/items";
 
 // import Register from "./accounts/Register";
 // import PrivateRoute from "./common/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./store";
-import Footer from "./components/layout/Footer";
-import Landing from "./components/layout/index/Landing";
-import Alerts from "./components/layout/Alerts";
-import Header from "./components/layout/Header";
-import Registration from "./components/accounts/Registration";
+import LandingPage from "./views/LandingPage/LandingPage";
+import SignupPage from "./views/SignupPage/SignupPage";
+import LoginPage from "./views/LoginPage/LoginPage";
+import OrderPage from "./views/OrderPage/OrderPage";
+import Alerts from "./components/Common/Alerts";
 
 // Alert Options
 const alertOptions = {
@@ -28,27 +31,31 @@ const alertOptions = {
 class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
+    store.dispatch(getItems());
   }
 
   render() {
     return (
-      <Provider store={store}>
-        <AlertProvider template={AlertTemplate} {...alertOptions}>
-          <Router>
-            <Fragment>
-              <Alerts />
-              <Header />
-              <div className="container-fluid main wrapper-3">
-                <Switch>
-                  <Route exact path="/" component={Landing} />
-                  <Route exact path="/login" component={Registration} />
-                </Switch>
-              </div>
-              <Footer />
-            </Fragment>
-          </Router>
-        </AlertProvider>
-      </Provider>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+          <AlertProvider template={AlertTemplate} {...alertOptions}>
+            <Router>
+              <Fragment>
+                <Alerts />
+                <div>
+                  <Switch>
+                    <Route exact path="/" component={LandingPage} />
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/signup" component={SignupPage} />
+                    <Route exact path="/order" component={OrderPage} />
+                  </Switch>
+                </div>
+                <br />
+              </Fragment>
+            </Router>
+          </AlertProvider>
+        </Provider>
+      </MuiThemeProvider>
     );
   }
 }

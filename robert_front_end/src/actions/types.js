@@ -9,3 +9,5 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const NEW_PATH = "NEW_PATH";
+export const GET_ITEMS = "GET_ITEMS";
+export const UPDATE_ORDER = "UPDATE_ORDER";

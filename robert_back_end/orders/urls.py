@@ -1,6 +1,11 @@
 from django.urls import path
 from django.conf.urls import url, include
 from . import views
+from rest_framework import routers
+from .api import ItemViewSet
+
+router = routers.DefaultRouter()
+router.register('api/items', ItemViewSet, 'items')
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -13,4 +18,4 @@ urlpatterns = [
     path("topup", views.topup, name="topup"),
     path("DO_update", views.DO_update, name="DO_update"),
     path("AO", views.AO, name="AO"),
-]
+] + router.urls

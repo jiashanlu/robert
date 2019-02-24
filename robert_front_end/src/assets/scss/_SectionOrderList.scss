@@ -1,0 +1,36 @@
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(1fr 1fr 1fr);
+  grid-auto-flow: dense;
+  padding-bottom: 2vw;
+  padding-top: 2vw;
+  justify-content: center;
+}
+
+.Baguette {
+  grid-column: 1;
+}
+.Croissant {
+  grid-column: 2;
+  border-left: 0.05vw solid #4fb98e;
+}
+.Special {
+  grid-column: 4;
+  border-left: 0.05vw solid #4fb98e;
+}
+.Baguette,
+.Croissant,
+.Special {
+  margin: auto;
+  padding: 1vw;
+  margin-top: 3vw;
+}
+@media screen and (max-width: 736px) /* iphone + */ {
+  .Baguette,
+  .Croissant,
+  .Special {
+    grid-column: 1/4;
+    border-left: none;
+    padding-top: 10vw;
+  }
+}

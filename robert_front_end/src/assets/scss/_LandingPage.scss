@@ -1,0 +1,21 @@
+.logo {
+  width: 8vw;
+}
+.logo-down {
+  width: 5vw;
+}
+.form-landing {
+  padding: 2vw;
+}
+.pac-container {
+  background-color: gray !important;
+}
+
+@media screen and (max-width: 979px) /* Tablet */ {
+  .logo {
+    width: 20vw;
+  }
+  .logo-down {
+    width: 15vw;
+  }
+}

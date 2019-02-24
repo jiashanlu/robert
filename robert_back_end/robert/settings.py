@@ -69,6 +69,8 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000/'
 )
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 ROOT_URLCONF = 'robert.urls'
 
