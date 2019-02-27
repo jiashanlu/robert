@@ -28,6 +28,9 @@ class SectionOrderList extends React.Component {
         </GridContainer>
         <GridContainer justify="center">
           <div className="container menu-container">
+            <img className="img-menu" src={baguette} />
+            <img className="img-menu" src={croissant} />
+            <img className="img-menu" src={special} />
             {items.items.map(item => (
               <CartItem key={item.id} item={item} />
             ))}

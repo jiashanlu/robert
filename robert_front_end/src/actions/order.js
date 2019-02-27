@@ -1,10 +1,13 @@
-import { UPDATE_ORDER } from "./types";
-
-//UPDATE ORDER
+import { UPDATE_ORDER, UPDATE_TOTAL } from "./types";
 
 export const updateOrder = update => {
-  return {
-    type: UPDATE_ORDER,
-    payload: update
+  return dispatch => {
+    dispatch({
+      type: UPDATE_ORDER,
+      payload: update
+    });
+    dispatch({
+      type: UPDATE_TOTAL
+    });
   };
 };

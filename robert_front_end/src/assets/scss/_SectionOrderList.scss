@@ -6,7 +6,9 @@
   padding-top: 2vw;
   justify-content: center;
 }
-
+.img-menu {
+  margin: auto;
+}
 .Baguette {
   grid-column: 1;
 }
@@ -15,7 +17,7 @@
   border-left: 0.05vw solid #4fb98e;
 }
 .Special {
-  grid-column: 4;
+  grid-column: 3;
   border-left: 0.05vw solid #4fb98e;
 }
 .Baguette,

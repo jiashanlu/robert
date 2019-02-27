@@ -1,4 +1,4 @@
-import { UPDATE_ORDER } from "../actions/types.js";
+import { UPDATE_ORDER, UPDATE_TOTAL } from "../actions/types.js";
 
 const initialState = {
   order: [],
@@ -15,7 +15,14 @@ export default function(state = initialState, action) {
           action.payload
         ]
       };
-
+    case UPDATE_TOTAL:
+      return {
+        ...state,
+        total: state.order.reduce(
+          (preVal, elem) => preVal + Number(elem.price * elem.qty),
+          0
+        )
+      };
     default:
       return state;
   }

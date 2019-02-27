@@ -11,11 +11,11 @@ import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { loadUser } from "./actions/auth";
 import { getItems } from "./actions/items";
-
 // import Register from "./accounts/Register";
 // import PrivateRoute from "./common/PrivateRoute";
 import { Provider } from "react-redux";
-import store from "./store";
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { store, persistor } from "./store";
 import LandingPage from "./views/LandingPage/LandingPage";
 import SignupPage from "./views/SignupPage/SignupPage";
 import LoginPage from "./views/LoginPage/LoginPage";
@@ -38,22 +38,26 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
-          <AlertProvider template={AlertTemplate} {...alertOptions}>
-            <Router>
-              <Fragment>
-                <Alerts />
-                <div>
-                  <Switch>
-                    <Route exact path="/" component={LandingPage} />
-                    <Route exact path="/login" component={LoginPage} />
-                    <Route exact path="/signup" component={SignupPage} />
-                    <Route exact path="/order" component={OrderPage} />
-                  </Switch>
-                </div>
-                <br />
-              </Fragment>
-            </Router>
-          </AlertProvider>
+          <PersistGate persistor={persistor}>
+            {" "}
+            {/* loading={<LoadingView />} */}
+            <AlertProvider template={AlertTemplate} {...alertOptions}>
+              <Router>
+                <Fragment>
+                  <Alerts />
+                  <div>
+                    <Switch>
+                      <Route exact path="/" component={LandingPage} />
+                      <Route exact path="/login" component={LoginPage} />
+                      <Route exact path="/signup" component={SignupPage} />
+                      <Route exact path="/order" component={OrderPage} />
+                    </Switch>
+                  </div>
+                  <br />
+                </Fragment>
+              </Router>
+            </AlertProvider>
+          </PersistGate>
         </Provider>
       </MuiThemeProvider>
     );

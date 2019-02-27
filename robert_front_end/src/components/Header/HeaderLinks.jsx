@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from "react";
+
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -80,15 +81,17 @@ function HeaderLinks({ ...props }) {
     </Link>
   );
   const loggedOut = (
-    <Button
-      onClick={props.logout}
-      className={classes.registerNavLink}
-      color="danger"
-      round
-      size="sm"
-    >
-      Sign-Out
-    </Button>
+    <Link to="/">
+      <Button
+        onClick={props.logout}
+        className={classes.registerNavLink}
+        color="danger"
+        round
+        size="sm"
+      >
+        Sign-Out
+      </Button>
+    </Link>
   );
   const order = (
     <Link to="/order">

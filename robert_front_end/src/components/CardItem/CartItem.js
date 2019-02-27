@@ -16,30 +16,44 @@ export class CartItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...this.props.item,
-      qty: 0,
-      imglink: ""
+      ...this.props.item
     };
   }
-  componentDidMount() {
-    this.setState({
-      imglink: "img-var/items/" + this.state.name + ".jpg"
-    });
-  }
+  componentDidMount = async () => {
+    try {
+      const qty_saved = this.props.order_saved.filter(
+        item => item.id === this.state.id
+      )[0].qty;
+      await this.setState({
+        imglink: "img-var/items/" + this.state.name + ".jpg",
+        qty: qty_saved !== 0 ? qty_saved : 0
+      });
+    } catch {
+      await this.setState({
+        imglink: "img-var/items/" + this.state.name + ".jpg",
+        qty: 0
+      });
+    } finally {
+      this.props.updateOrder(this.state);
+    }
+  };
+
   add = async () => {
-    const lastQty = this.state.qty;
-    await this.setState({
-      qty: lastQty + 1
+    await this.setState(prevState => {
+      return {
+        qty: prevState.qty + 1
+      };
     });
-    console.log(this.state);
     this.props.updateOrder(this.state);
   };
   remove = async () => {
-    const lastQty = this.state.qty;
-    console.log(lastQty);
-    (await lastQty) > 0
-      ? this.setState({ qty: lastQty - 1 })
-      : this.setState({ qty: 0 });
+    await this.setState(prevState => {
+      if (prevState.qty > 0) {
+        return {
+          qty: prevState.qty - 1
+        };
+      }
+    });
     this.props.updateOrder(this.state);
   };
 
@@ -81,10 +95,13 @@ export class CartItem extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  order_saved: state.order.order
+});
 
 export default withStyles(cartItemStyle)(
   connect(
-    null,
+    mapStateToProps,
     { updateOrder }
   )(CartItem)
 );
