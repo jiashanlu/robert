@@ -11,8 +11,8 @@ import {
   infoColor,
   whiteColor,
   roseColor
-} from "../../material-kit-pro-react.jsx";
-import imagesStyles from "../../material-kit-pro-react/imagesStyles.jsx";
+} from '../../material-kit-pro-react.jsx';
+import imagesStyles from '../../material-kit-pro-react/imagesStyles.jsx';
 
 const cardItemStyle = {
   grayColor,
@@ -29,14 +29,14 @@ const cardItemStyle = {
   roseColor,
   ...imagesStyles,
   justifyContentCenter: {
-    WebkitBoxPack: "center !important",
-    MsFlexPack: "center !important",
-    justifyContent: "center !important"
+    WebkitBoxPack: 'center !important',
+    MsFlexPack: 'center !important',
+    justifyContent: 'center !important'
   },
   card: {
-    marginBottom: "5px",
-    marginTop: "5x",
-    width: "100%"
+    marginBottom: '5px',
+    marginTop: '5x',
+    width: '100%'
   }
 };
 

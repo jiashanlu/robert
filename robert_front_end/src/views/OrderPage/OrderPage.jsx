@@ -1,24 +1,25 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 // core components
-import Header from "../../components/Header/Header.jsx";
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
-import Button from "../../components/CustomButtons/Button.jsx";
-import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
-import Parallax from "../../components/Parallax/Parallax.jsx";
-import logo from "../../assets/img/logo-color2.svg";
-import Footer from "../../components/Footer/Footer";
-import { connect } from "react-redux";
-import OrderPageStyle from "../../assets/jss/material-kit-pro-react/views/orderPageStyle";
-import { newPath } from "../../actions/path";
+import Header from '../../components/Header/Header.jsx';
+import GridContainer from '../../components/Grid/GridContainer.jsx';
+import GridItem from '../../components/Grid/GridItem.jsx';
+import Button from '../../components/CustomButtons/Button.jsx';
+import HeaderLinks from '../../components/Header/HeaderLinks.jsx';
+import Parallax from '../../components/Parallax/Parallax.jsx';
+import logo from '../../assets/img/logo-color2.svg';
+import Footer from '../../components/Footer/Footer';
+import { connect } from 'react-redux';
+import OrderPageStyle from '../../assets/jss/material-kit-pro-react/views/orderPageStyle';
+import { newPath } from '../../actions/path';
 
 // Sections for this page
-import SectionOrderList from "./Sections/SectionOrderList.jsx";
+import SectionOrderList from './Sections/SectionOrderList.jsx';
+import BannerCart from '../../components/BannerCart/BannerCart.js';
 
 class OrderPage extends React.Component {
   componentDidMount() {
@@ -37,12 +38,12 @@ class OrderPage extends React.Component {
           logo={logo}
           changeColorOnScroll={{
             height: 100,
-            color: "primary"
+            color: 'primary'
           }}
           {...rest}
         />
         <Parallax
-          image={require("../../assets/img/order-bg.jpg")}
+          image={require('../../assets/img/order-bg.jpg')}
           filter="dark"
           className={classes.parallax}
         />

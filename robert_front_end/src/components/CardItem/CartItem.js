@@ -1,16 +1,15 @@
-import React, { Component, Fragment } from "react";
-import Card from "../../components/Card/Card.jsx";
-import CardBody from "../../components/Card/CardBody.jsx";
-import CardHeader from "../../components/Card/CardHeader.jsx";
-import CardFooter from "../../components/Card/CardFooter.jsx";
-import Add from "@material-ui/icons/Add";
-import Remove from "@material-ui/icons/Remove";
-import cartItemStyle from "../../assets/jss/material-kit-pro-react/components/cartItemStyle";
-import Button from "../CustomButtons/Button";
-import withStyles from "@material-ui/core/styles/withStyles";
-import { connect } from "react-redux";
-import { updateOrder } from "../../actions/order";
-import customDropdownStyle from "../../assets/jss/material-kit-pro-react/components/customDropdownStyle.jsx";
+import React, { Component, Fragment } from 'react';
+import Card from '../../components/Card/Card.jsx';
+import CardBody from '../../components/Card/CardBody.jsx';
+import CardHeader from '../../components/Card/CardHeader.jsx';
+import CardFooter from '../../components/Card/CardFooter.jsx';
+import Add from '@material-ui/icons/Add';
+import Remove from '@material-ui/icons/Remove';
+import cartItemStyle from '../../assets/jss/material-kit-pro-react/components/cartItemStyle';
+import Button from '../CustomButtons/Button';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { connect } from 'react-redux';
+import { updateOrder } from '../../actions/order';
 
 export class CartItem extends Component {
   constructor(props) {
@@ -25,12 +24,12 @@ export class CartItem extends Component {
         item => item.id === this.state.id
       )[0].qty;
       await this.setState({
-        imglink: "img-var/items/" + this.state.name + ".jpg",
+        imglink: 'img-var/items/' + this.state.name + '.jpg',
         qty: qty_saved !== 0 ? qty_saved : 0
       });
     } catch {
       await this.setState({
-        imglink: "img-var/items/" + this.state.name + ".jpg",
+        imglink: 'img-var/items/' + this.state.name + '.jpg',
         qty: 0
       });
     } finally {
@@ -62,14 +61,14 @@ export class CartItem extends Component {
     const { classes } = this.props;
     return (
       <div className={type}>
-        <Card profile style={{ width: "85%", margin: "auto" }}>
+        <Card profile style={{ width: '85%', margin: 'auto' }}>
           <CardHeader image>
             <img src={imglink} alt={name} />
             <div
               className={classes.coloredShadow}
               style={{
                 backgroundImage: `url(${imglink})`,
-                opacity: "1"
+                opacity: '1'
               }}
             />
           </CardHeader>
