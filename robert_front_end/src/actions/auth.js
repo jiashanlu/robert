@@ -1,5 +1,5 @@
-import axios from "axios";
-import { returnErrors } from "./messages";
+import axios from 'axios';
+import { returnErrors } from './messages';
 import {
   USER_LOADED,
   USER_LOADING,
@@ -9,21 +9,21 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL
-} from "./types";
+} from './types';
 
 // LOGIN USER
 export const login = (username, password) => dispatch => {
   // Headers
   const config = {
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
   };
   // Request Body
   const body = JSON.stringify({ username, password });
   console.log(body);
   axios
-    .post("http://localhost:8000/api/auth/login", body, config)
+    .post('http://localhost:8000/rest-auth/login/', body, config)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -39,17 +39,22 @@ export const login = (username, password) => dispatch => {
 };
 
 // REGISTER USER
-export const register = ({ username, password, email }) => dispatch => {
+export const register = ({
+  username,
+  password1,
+  password2,
+  email
+}) => dispatch => {
   // Headers
   const config = {
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
   };
-  const body = JSON.stringify({ username, email, password });
+  const body = JSON.stringify({ username, password1, password2, email });
 
   axios
-    .post("http://localhost:8000/api/auth/register", body, config)
+    .post('http://localhost:8000/rest-auth/registration/', body, config)
     .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
@@ -67,7 +72,7 @@ export const register = ({ username, password, email }) => dispatch => {
 // LOGOUT USER
 export const logout = () => (dispatch, getState) => {
   axios
-    .post("http://localhost:8000/api/auth/logout", null, tokenConfig(getState))
+    .post('http://localhost:8000/rest-auth/logout/')
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS
@@ -83,7 +88,7 @@ export const loadUser = () => (dispatch, getState) => {
   // User Loading
   dispatch({ type: USER_LOADING });
   axios
-    .get("http://localhost:8000/api/auth/user", tokenConfig(getState))
+    .get('http://localhost:8000/rest-auth/user/', tokenConfig(getState))
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -105,12 +110,12 @@ export const tokenConfig = getState => {
   // Headers
   const config = {
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
   };
   // if token, add to headers config
   if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
+    config.headers['Authorization'] = `Token ${token}`;
   }
   return config;
 };

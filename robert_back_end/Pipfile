@@ -5,7 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 
-
 [packages]
 django = "==2.1.7"
 stripe = "*"
@@ -17,7 +16,7 @@ coverage = "*"
 djangorestframework = "*"
 django-rest-knox = "*"
 django-cors-headers = "*"
-
+django-rest-auth = {extras = ["with_social"],version = "*"}
 
 [requires]
 python_version = "3.7"

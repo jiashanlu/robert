@@ -1,20 +1,19 @@
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
-import thunk from "redux-thunk";
-import rootReducer from "./reducers";
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+import LogRocket from 'logrocket';
 
-const persistConfig = {
-  key: "root",
+const rootPersistConfig = {
+  key: 'root',
   storage: storage,
-  stateReconciler: autoMergeLevel2,
-  whitelist: ["order"]
+  blacklist: ['order', 'errors', 'path', 'items']
 };
-const pReducer = persistReducer(persistConfig, rootReducer);
+const pReducer = persistReducer(rootPersistConfig, rootReducer);
 
-const middleware = [thunk];
+const middleware = [thunk, LogRocket.reduxMiddleware()];
 export const store = createStore(
   pReducer,
   composeWithDevTools(applyMiddleware(...middleware))

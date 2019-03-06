@@ -6,9 +6,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 // core components
 import Header from '../../components/Header/Header.jsx';
-import GridContainer from '../../components/Grid/GridContainer.jsx';
-import GridItem from '../../components/Grid/GridItem.jsx';
-import Button from '../../components/CustomButtons/Button.jsx';
 import HeaderLinks from '../../components/Header/HeaderLinks.jsx';
 import Parallax from '../../components/Parallax/Parallax.jsx';
 import logo from '../../assets/img/logo-color2.svg';
@@ -19,7 +16,6 @@ import { newPath } from '../../actions/path';
 
 // Sections for this page
 import SectionOrderList from './Sections/SectionOrderList.jsx';
-import BannerCart from '../../components/BannerCart/BannerCart.js';
 
 class OrderPage extends React.Component {
   componentDidMount() {

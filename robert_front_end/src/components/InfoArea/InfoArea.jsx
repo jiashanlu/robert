@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import Icon from "@material-ui/core/Icon";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Icon from '@material-ui/core/Icon';
 
-import infoStyle from "../../assets/jss/material-kit-pro-react/components/infoStyle.jsx";
+import infoStyle from '../../assets/jss/material-kit-pro-react/components/infoStyle.jsx';
 
 function InfoArea({ ...props }) {
   const { classes, title, description, iconColor, vertical, className } = props;
@@ -26,7 +26,7 @@ function InfoArea({ ...props }) {
   });
   let icon = null;
   switch (typeof props.icon) {
-    case "string":
+    case 'string':
       icon = <Icon className={iconClasses}>{props.icon}</Icon>;
       break;
     default:
@@ -36,7 +36,7 @@ function InfoArea({ ...props }) {
   return (
     <div className={infoAreaClasses}>
       {/* <div className={iconWrapper}>{icon}</div> */}
-      <img src={props.img} />
+      <img src={props.img} alt="img" />
       <div className={classes.descriptionWrapper}>
         <h4 className={classes.title}>{title}</h4>
         <div className={classes.description}>{description}</div>
@@ -46,7 +46,7 @@ function InfoArea({ ...props }) {
 }
 
 InfoArea.defaultProps = {
-  iconColor: "gray"
+  iconColor: 'gray'
 };
 
 InfoArea.propTypes = {
@@ -55,13 +55,13 @@ InfoArea.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.node.isRequired,
   iconColor: PropTypes.oneOf([
-    "primary",
-    "warning",
-    "danger",
-    "success",
-    "info",
-    "rose",
-    "gray"
+    'primary',
+    'warning',
+    'danger',
+    'success',
+    'info',
+    'rose',
+    'gray'
   ]),
   vertical: PropTypes.bool,
   className: PropTypes.string

@@ -7,6 +7,9 @@ import CartItem from '../../../components/CardItem/CartItem';
 // core components
 import GridContainer from '../../../components/Grid/GridContainer.jsx';
 import GridItem from '../../../components/Grid/GridItem.jsx';
+import Grid from '@material-ui/core/Grid';
+import Quote from '../../../components/Typography/Quote';
+
 import baguette from '../../../assets/img/icon-baguette.svg';
 import croissant from '../../../assets/img/icon-croissant.svg';
 import special from '../../../assets/img/icon-special.svg';
@@ -25,21 +28,26 @@ class SectionOrderList extends React.Component {
             <BannerCart />
           </GridItem>
         </GridContainer>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={12}>
-            <h3 className={classes.title}>
-              Select your favorites products from our selection
-            </h3>
-          </GridItem>
+        <Grid container alignItems="baseline" justify="space-between">
+          <Grid item xs={12} sm={7} md={7}>
+            <Quote
+              text='"Select your favorites products from our selection"'
+              author="Robert"
+            />
+          </Grid>
+          <Grid item xs={12} sm={5} md={5}>
+            <span>
+              <img className="img-menu" alt="img" src={baguette} />
+              <img className="img-menu" alt="img" src={croissant} />
+              <img className="img-menu" alt="img" src={special} />
+            </span>
+          </Grid>
           <div className="container menu-container">
-            <img className="img-menu" src={baguette} />
-            <img className="img-menu" src={croissant} />
-            <img className="img-menu" src={special} />
             {items.items.map(item => (
               <CartItem key={item.id} item={item} />
             ))}
           </div>
-        </GridContainer>
+        </Grid>
       </div>
     );
   }

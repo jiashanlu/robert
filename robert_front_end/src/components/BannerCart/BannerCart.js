@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Card from '../../components/Card/Card.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 import styles from '../../assets/jss/material-kit-pro-react/components/BannerCart';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
+import Moment from 'react-moment';
 export class BannerCart extends Component {
   constructor(props) {
     super(props);
@@ -25,24 +28,24 @@ export class BannerCart extends Component {
     for (let i = 0; i < rotatingCards.length; i++) {
       var rotatingCard = rotatingCards[i];
       var rotatingWrapper = rotatingCard.parentElement;
-      var cardWidth = rotatingCard.parentElement.offsetWidth;
+      // var cardWidth = rotatingCard.parentElement.offsetWidth;
       var cardHeight = rotatingCard.children[0].children[0].offsetHeight;
       rotatingWrapper.style.height = cardHeight + 'px';
       rotatingWrapper.style['margin-bottom'] = 30 + 'px';
       var cardFront = rotatingCard.getElementsByClassName(classes.front)[0];
       var cardBack = rotatingCard.getElementsByClassName(classes.back)[0];
-      cardFront.style.height = cardHeight + 35 + 'px';
+      cardFront.style.height = cardHeight + 'px';
       cardFront.style.width = '100%';
-      cardBack.style.height = cardHeight + 35 + 'px';
+      cardBack.style.height = cardHeight + 'px';
       cardBack.style.width = '100%';
     }
   };
 
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes } = this.props;
     const { startDate } = this.state;
     const order = this.props.order.order.filter(ord => ord.qty > 0);
-    const { total } = this.props.order;
+    const { total, date } = this.props.order;
     return (
       <GridContainer justify="center">
         <GridItem>
@@ -54,54 +57,88 @@ export class BannerCart extends Component {
             <Card className={classes.cardRotate}>
               <div className={classes.front}>
                 <CardBody className={classes.cardBodyRotate}>
-                  <h4 className={classes.cardTitle}>
-                    Your order for tommorow :
-                  </h4>
-                  <GridContainer justify="center">
-                    <GridItem>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="flex-start"
+                  >
+                    <Grid item xs={12} sm={8} md={5}>
                       {order.map((item, index) => (
-                        <span>
-                          <b>
-                            {item.qty}{' '}
-                            {item.qty > 1 ? item.name + 's' : item.name}
-                            {index < order.length - 1 ? ', ' : ''}
-                          </b>
-                        </span>
+                        <b key={item.id}>
+                          {item.qty}{' '}
+                          {item.qty > 1 ? item.name + 's' : item.name}
+                          {index < order.length - 1 ? ', ' : ''}
+                        </b>
                       ))}
-                      <p>
-                        Total <small>(before discount)</small> : {total} AED
-                      </p>
-                    </GridItem>
-                  </GridContainer>
-                  <div className={classes.textCenter}>
-                    <Button
-                      round
-                      color="gray"
-                      onClick={() =>
-                        this.setState({
-                          activeRotate1: classes.activateRotate
-                        })
-                      }
-                    >
-                      <Refresh /> Select another Day
-                    </Button>
-                  </div>
+                      <br />
+                      <span>
+                        {total === 0 ? (
+                          <b>Your Cart is empty, let's have a try!</b>
+                        ) : (
+                          <span>
+                            Total
+                            <small> (before discount) : </small>
+                            {total} AED
+                          </span>
+                        )}
+                      </span>
+                      <br />
+                      <br />
+                      <Button round variant="outlined" color="success">
+                        Confirm your order
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} sm={8} md={3}>
+                      <span>
+                        <b>
+                          For <Moment format="dddd Do">{date}</Moment>
+                        </b>
+                      </span>
+                      <span style={{ padding: '1vw' }}>
+                        <Tooltip title="Check another date?" placement="top">
+                          <Button
+                            justIcon
+                            round
+                            color="white"
+                            onClick={() =>
+                              this.setState({
+                                activeRotate1: classes.activateRotate
+                              })
+                            }
+                          >
+                            <Refresh />
+                          </Button>
+                        </Tooltip>
+                      </span>
+                    </Grid>
+                  </Grid>
                 </CardBody>
               </div>
               <div className={classes.back}>
                 <CardBody className={classes.cardBodyRotate}>
-                  <DayPicker
-                    selectedDay={startDate}
-                    numberOfMonths={3}
-                    canChangeMonth={false}
-                    onChange={this.handleChange}
-                  />
-                  <Button
-                    link
-                    onClick={() => this.setState({ activeRotate1: '' })}
+                  <Grid
+                    container
+                    justify="space-between"
+                    alignItems="flex-start"
                   >
-                    <Refresh /> Back...
-                  </Button>
+                    <Grid item xs={12} sm={12} md={12}>
+                      <DayPicker
+                        selectedDay={startDate}
+                        numberOfMonths={3}
+                        canChangeMonth={false}
+                        onChange={this.handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12}>
+                      <Button
+                        link
+                        onClick={() => this.setState({ activeRotate1: '' })}
+                      >
+                        <Refresh /> Back...
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </CardBody>
               </div>
             </Card>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Card from '../../components/Card/Card.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
@@ -57,7 +57,7 @@ export class CartItem extends Component {
   };
 
   render() {
-    const { id, type, name, price, qty, imglink } = this.state;
+    const { type, name, price, qty, imglink } = this.state;
     const { classes } = this.props;
     return (
       <div className={type}>
@@ -81,12 +81,14 @@ export class CartItem extends Component {
             </h6>
           </CardBody>
           <CardFooter profile className={classes.justifyContentCenter}>
-            <Button onClick={this.remove} simple size="lg" color="danger">
-              <Remove />
+            <Button onClick={this.remove} justIcon round color="white">
+              <Remove style={{ color: 'red' }} />
             </Button>
-            <h3 className={classes.qty}>{qty} </h3>
-            <Button onClick={this.add} simple size="lg" color="success">
-              <Add />
+            <h3 style={{ padding: '0 2vw' }} className={classes.qty}>
+              {qty}
+            </h3>
+            <Button onClick={this.add} justIcon round color="white">
+              <Add style={{ color: 'green' }} />
             </Button>
           </CardFooter>
         </Card>

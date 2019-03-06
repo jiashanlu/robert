@@ -1,39 +1,39 @@
-import React from "react";
+import React from 'react';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Icon from "@material-ui/core/Icon";
+import withStyles from '@material-ui/core/styles/withStyles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
-import Face from "@material-ui/icons/Face";
-import Email from "@material-ui/icons/Email";
-import Check from "@material-ui/icons/Check";
+import Face from '@material-ui/icons/Face';
+import Email from '@material-ui/icons/Email';
+import Check from '@material-ui/icons/Check';
 // core components
-import Header from "../../components/Header/Header.jsx";
-import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
-import Button from "../../components/CustomButtons/Button.jsx";
-import Card from "../../components/Card/Card.jsx";
+import Header from '../../components/Header/Header.jsx';
+import HeaderLinks from '../../components/Header/HeaderLinks.jsx';
+import GridContainer from '../../components/Grid/GridContainer.jsx';
+import GridItem from '../../components/Grid/GridItem.jsx';
+import Button from '../../components/CustomButtons/Button.jsx';
+import Card from '../../components/Card/Card.jsx';
 // import InfoArea from "components/InfoArea/InfoArea.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
-import logo from "../../assets/img/logo-color2.svg";
-import signupPageStyle from "../../assets/jss/material-kit-pro-react/views/signupPageStyle.jsx";
-import image from "../../assets/img/login-picture.jpg";
-import { connect } from "react-redux";
-import { register } from "../../actions/auth";
-import { newPath } from "../../actions/path";
-import { createMessage } from "../../actions/messages";
-import { Redirect, Link } from "react-router-dom";
+import CustomInput from '../../components/CustomInput/CustomInput.jsx';
+import logo from '../../assets/img/logo-color2.svg';
+import signupPageStyle from '../../assets/jss/material-kit-pro-react/views/signupPageStyle.jsx';
+import image from '../../assets/img/login-picture.jpg';
+import { connect } from 'react-redux';
+import { register } from '../../actions/auth';
+import { newPath } from '../../actions/path';
+import { createMessage } from '../../actions/messages';
+import { Redirect, Link } from 'react-router-dom';
 
 class SignupPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      email: "",
+      username: '',
+      password: '',
+      email: '',
       checked: [1]
     };
     this.handleToggle = this.handleToggle.bind(this);
@@ -68,14 +68,16 @@ class SignupPage extends React.Component {
     const { username, email, password, checked } = this.state;
     const newUser = {
       username,
-      password,
+      password1: password,
+      password2: password,
       email
     };
     if (checked.indexOf(1) !== -1) {
+      console.log(newUser);
       this.props.register(newUser);
     } else {
       this.props.createMessage({
-        termsnotagreed: "please agree on terms first"
+        termsnotagreed: 'please agree on terms first'
       });
     }
   };
@@ -98,9 +100,9 @@ class SignupPage extends React.Component {
         <div
           className={classes.pageHeader}
           style={{
-            backgroundImage: "url(" + image + ")",
-            backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundImage: 'url(' + image + ')',
+            backgroundSize: 'cover',
+            backgroundPosition: 'top center'
           }}
         >
           <div className={classes.container}>
@@ -112,16 +114,16 @@ class SignupPage extends React.Component {
                     <GridItem xs={12} sm={5} md={5}>
                       <div className={classes.textCenter}>
                         <Button justIcon round color="twitter">
-                          <i className={classes.socials + " fab fa-twitter"} />
+                          <i className={classes.socials + ' fab fa-twitter'} />
                         </Button>
                         {` `}
                         <Button justIcon round color="dribbble">
-                          <i className={classes.socials + " fab fa-dribbble"} />
+                          <i className={classes.socials + ' fab fa-dribbble'} />
                         </Button>
                         {` `}
                         <Button justIcon round color="facebook">
                           <i
-                            className={classes.socials + " fab fa-facebook-f"}
+                            className={classes.socials + ' fab fa-facebook-f'}
                           />
                         </Button>
                         {` `}
@@ -143,9 +145,9 @@ class SignupPage extends React.Component {
                                 <Face className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            name: "username",
+                            name: 'username',
                             value: username,
-                            placeholder: "Username",
+                            placeholder: 'Username',
                             onChange: this.onChange
                           }}
                         />
@@ -163,8 +165,8 @@ class SignupPage extends React.Component {
                                 <Email className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: "Email...",
-                            name: "email",
+                            placeholder: 'Email...',
+                            name: 'email',
                             value: email,
                             onChange: this.onChange
                           }}
@@ -185,11 +187,11 @@ class SignupPage extends React.Component {
                                 </Icon>
                               </InputAdornment>
                             ),
-                            name: "password",
+                            name: 'password',
                             value: password,
-                            placeholder: "Password...",
+                            placeholder: 'Password...',
                             onChange: this.onChange,
-                            type: "password"
+                            type: 'password'
                           }}
                         />
                         <FormControlLabel
@@ -217,7 +219,7 @@ class SignupPage extends React.Component {
                           }
                           label={
                             <span>
-                              I agree to the{" "}
+                              I agree to the{' '}
                               <a href="#pablo">terms and conditions</a>.
                             </span>
                           }

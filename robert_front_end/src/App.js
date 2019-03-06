@@ -1,36 +1,36 @@
-import React, { Component, Fragment } from "react";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import theme from "./components/Common/Theme";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
-import { Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
-import { loadUser } from "./actions/auth";
-import { getItems } from "./actions/items";
+import React, { Component, Fragment } from 'react';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from './components/Common/Theme';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
+import { loadUser } from './actions/auth';
+import { getItems } from './actions/items';
 // import Register from "./accounts/Register";
 // import PrivateRoute from "./common/PrivateRoute";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/lib/integration/react";
-import { store, persistor } from "./store";
-import LandingPage from "./views/LandingPage/LandingPage";
-import SignupPage from "./views/SignupPage/SignupPage";
-import LoginPage from "./views/LoginPage/LoginPage";
-import OrderPage from "./views/OrderPage/OrderPage";
-import Alerts from "./components/Common/Alerts";
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { store, persistor } from './store';
+import LandingPage from './views/LandingPage/LandingPage';
+import SignupPage from './views/SignupPage/SignupPage';
+import LoginPage from './views/LoginPage/LoginPage';
+import OrderPage from './views/OrderPage/OrderPage';
+import Alerts from './components/Common/Alerts';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
+
+LogRocket.init('w39fwu/robert');
+setupLogRocketReact(LogRocket);
 
 // Alert Options
 const alertOptions = {
   timeout: 3000,
-  position: "top center"
+  position: 'top center'
 };
 
 class App extends Component {
   componentDidMount() {
-    store.dispatch(loadUser());
+    // store.dispatch(loadUser());
     store.dispatch(getItems());
   }
 
@@ -39,7 +39,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            {" "}
+            {' '}
             {/* loading={<LoadingView />} */}
             <AlertProvider template={AlertTemplate} {...alertOptions}>
               <Router>
