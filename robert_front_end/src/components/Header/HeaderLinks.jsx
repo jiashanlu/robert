@@ -1,30 +1,30 @@
 /* eslint-disable */
-import React from "react";
+import React from 'react';
 
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import withStyles from '@material-ui/core/styles/withStyles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 // @material-ui/icons
-import Apps from "@material-ui/icons/Apps";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Layers from "@material-ui/icons/Layers";
-import Assignment from "@material-ui/icons/Assignment";
-import Build from "@material-ui/icons/Build";
+import Apps from '@material-ui/icons/Apps';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Layers from '@material-ui/icons/Layers';
+import Assignment from '@material-ui/icons/Assignment';
+import Build from '@material-ui/icons/Build';
 
 // core components
-import CustomDropdown from "../CustomDropdown/CustomDropdown.jsx";
-import Button from "../CustomButtons/Button.jsx";
-import { logout } from "../../actions/auth";
+import CustomDropdown from '../CustomDropdown/CustomDropdown.jsx';
+import Button from '../CustomButtons/Button.jsx';
+import { logout } from '../../actions/auth';
 
-import headerLinksStyle from "../../assets/jss/material-kit-pro-react/components/headerLinksStyle.jsx";
+import headerLinksStyle from '../../assets/jss/material-kit-pro-react/components/headerLinksStyle.jsx';
 
 function HeaderLinks({ ...props }) {
   const easeInOutQuad = (t, b, c, d) => {
@@ -35,7 +35,7 @@ function HeaderLinks({ ...props }) {
   };
 
   const smoothScroll = (e, target) => {
-    if (window.location.pathname === "/sections") {
+    if (window.location.pathname === '/sections') {
       var isMobile = navigator.userAgent.match(
         /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i
       );
@@ -108,7 +108,7 @@ function HeaderLinks({ ...props }) {
       buttonText="My Account"
       buttonProps={{
         className: classes.navLink,
-        color: "transparent"
+        color: 'transparent'
       }}
       buttonIcon={Apps}
       dropdownList={[
@@ -132,12 +132,12 @@ function HeaderLinks({ ...props }) {
   );
 
   return (
-    <List className={classes.list + " " + classes.mlAuto}>
+    <List className={classes.list + ' ' + classes.mlAuto}>
       <ListItem className={classes.listItem}>
-        {isAuthenticated ? order : ""}
+        {isAuthenticated ? order : ''}
       </ListItem>
       <ListItem className={classes.listItem}>
-        {isAuthenticated ? menu : ""}
+        {isAuthenticated ? menu : ''}
       </ListItem>
 
       <span>&nbsp;&nbsp; </span>
@@ -149,18 +149,18 @@ function HeaderLinks({ ...props }) {
 }
 
 HeaderLinks.defaultProps = {
-  hoverColor: "primary"
+  hoverColor: 'primary'
 };
 
 HeaderLinks.propTypes = {
   dropdownHoverColor: PropTypes.oneOf([
-    "dark",
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose"
+    'dark',
+    'primary',
+    'info',
+    'success',
+    'warning',
+    'danger',
+    'rose'
   ])
 };
 

@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import { withAlert } from "react-alert";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { Component, Fragment } from 'react';
+import { withAlert } from 'react-alert';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 export class Alerts extends Component {
   static propTypes = {
@@ -19,12 +19,14 @@ export class Alerts extends Component {
       if (error.msg.non_field_errors)
         alert.error(error.msg.non_field_errors.join());
       if (error.msg.username) alert.error(error.msg.username.join());
+      if (error.msg.notAvailable) alert.error(error.msg.notAvailable);
     }
     if (message !== prevProps.message) {
       if (message.deleteLead) alert.success(message.deleteLead);
       if (message.leadAdded) alert.success(message.leadAdded);
       if (message.passwordsNotMatch) alert.error(message.passwordsNotMatch);
       if (message.termsnotagreed) alert.error(message.termsnotagreed);
+      if (message.AddressOK) alert.success(message.AddressOK);
     }
   }
 

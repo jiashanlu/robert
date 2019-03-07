@@ -12,7 +12,7 @@ import {
 } from './types';
 
 // LOGIN USER
-export const login = (username, password) => dispatch => {
+export const login = (username, password, email) => dispatch => {
   // Headers
   const config = {
     headers: {
@@ -20,7 +20,7 @@ export const login = (username, password) => dispatch => {
     }
   };
   // Request Body
-  const body = JSON.stringify({ username, password });
+  const body = JSON.stringify({ username, password, email });
   console.log(body);
   axios
     .post('http://localhost:8000/rest-auth/login/', body, config)
@@ -29,12 +29,36 @@ export const login = (username, password) => dispatch => {
         type: LOGIN_SUCCESS,
         payload: res.data
       });
+      dispatch(loadUser());
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LOGIN_FAIL
       });
+    });
+};
+
+// FACEBOOK LOGIN USER
+export const loginFacebook = () => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  // Request Body
+  const body = {
+    code: '607f32621df274daf77a891c329054d7'
+  };
+  axios
+    .post('http://localhost:8000/rest-auth/facebook/', body, config)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      console.log(err);
     });
 };
 
@@ -88,7 +112,7 @@ export const loadUser = () => (dispatch, getState) => {
   // User Loading
   dispatch({ type: USER_LOADING });
   axios
-    .get('http://localhost:8000/rest-auth/user/', tokenConfig(getState))
+    .get('http://localhost:8000/rest-auth/user', tokenConfig(getState))
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -117,5 +141,6 @@ export const tokenConfig = getState => {
   if (token) {
     config.headers['Authorization'] = `Token ${token}`;
   }
+  console.log(config);
   return config;
 };

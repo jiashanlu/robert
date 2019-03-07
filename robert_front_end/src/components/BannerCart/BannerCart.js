@@ -13,10 +13,14 @@ import 'react-day-picker/lib/style.css';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 import Moment from 'react-moment';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import OrderConfirm from '../../components/OrderConfirm/OrderConfirm';
 export class BannerCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
       activeRotate1: '',
       activeRotate2: '',
       startDate: new Date()
@@ -40,6 +44,12 @@ export class BannerCart extends Component {
       cardBack.style.width = '100%';
     }
   };
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     const { classes } = this.props;
@@ -48,6 +58,13 @@ export class BannerCart extends Component {
     const { total, date } = this.props.order;
     return (
       <GridContainer justify="center">
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <OrderConfirm />
+        </Dialog>
         <GridItem>
           <div
             className={`${classes.rotatingCardContainer} ${
@@ -85,7 +102,12 @@ export class BannerCart extends Component {
                       </span>
                       <br />
                       <br />
-                      <Button round variant="outlined" color="success">
+                      <Button
+                        onClick={this.handleClickOpen}
+                        round
+                        variant="outlined"
+                        color="success"
+                      >
                         Confirm your order
                       </Button>
                     </Grid>

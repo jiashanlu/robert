@@ -6,6 +6,7 @@ import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { loadUser } from './actions/auth';
 import { getItems } from './actions/items';
+import { getAreas } from './actions/areas';
 // import Register from "./accounts/Register";
 // import PrivateRoute from "./common/PrivateRoute";
 import { Provider } from 'react-redux';
@@ -30,8 +31,9 @@ const alertOptions = {
 
 class App extends Component {
   componentDidMount() {
-    // store.dispatch(loadUser());
+    store.dispatch(loadUser());
     store.dispatch(getItems());
+    store.dispatch(getAreas());
   }
 
   render() {

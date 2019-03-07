@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 // core components
-import Header from "../../components/Header/Header.jsx";
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
-import Button from "../../components/CustomButtons/Button.jsx";
-import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
-import Parallax from "../../components/Parallax/Parallax.jsx";
-import logo from "../../assets/img/logo-color2.svg";
-import Form from "../../components/Geo/LandingForm";
-import Footer from "../../components/Footer/Footer";
-import { connect } from "react-redux";
-import landingPageStyle from "../../assets/jss/material-kit-pro-react/views/landingPageStyle.jsx";
-import { newPath } from "../../actions/path";
+import Header from '../../components/Header/Header.jsx';
+import GridContainer from '../../components/Grid/GridContainer.jsx';
+import GridItem from '../../components/Grid/GridItem.jsx';
+import Button from '../../components/CustomButtons/Button.jsx';
+import HeaderLinks from '../../components/Header/HeaderLinks.jsx';
+import Parallax from '../../components/Parallax/Parallax.jsx';
+import logo from '../../assets/img/logo-color2.svg';
+import Form from '../../components/Geo/LandingForm';
+import Footer from '../../components/Footer/Footer';
+import { connect } from 'react-redux';
+import landingPageStyle from '../../assets/jss/material-kit-pro-react/views/landingPageStyle.jsx';
+import { newPath } from '../../actions/path';
 
 // Sections for this page
-import SectionProduct from "./Sections/SectionProduct.jsx";
+import SectionProduct from './Sections/SectionProduct.jsx';
 // import SectionTeam from "./Sections/SectionTeam.jsx";
 // import SectionWork from "./Sections/SectionWork.jsx";
 
@@ -40,12 +40,12 @@ class LandingPage extends React.Component {
           logo={logo}
           changeColorOnScroll={{
             height: 100,
-            color: "primary"
+            color: 'primary'
           }}
           {...rest}
         />
         <Parallax
-          image={require("../../assets/img/robert-landing.jpg")}
+          image={require('../../assets/img/robert-landing.jpg')}
           filter="dark"
         >
           <div className={classes.container}>
@@ -59,17 +59,6 @@ class LandingPage extends React.Component {
                 </h4>
                 <br />
                 <Form className="form-landing" />
-                <br />
-                <Button
-                  color="success"
-                  size="lg"
-                  href=""
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fas fa-play" />
-                  Try Now !
-                </Button>
               </GridItem>
             </GridContainer>
           </div>
@@ -77,7 +66,6 @@ class LandingPage extends React.Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <SectionProduct />
-
             {/* <SectionTeam /> */}
             {/* <SectionWork /> */}
           </div>

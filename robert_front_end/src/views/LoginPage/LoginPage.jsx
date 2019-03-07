@@ -1,32 +1,33 @@
-import React from "react";
+import React from 'react';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
+import withStyles from '@material-ui/core/styles/withStyles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
-import Face from "@material-ui/icons/Face";
+import Face from '@material-ui/icons/Face';
 // core components
-import Header from "../../components/Header/Header.jsx";
-import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
-import Button from "../../components/CustomButtons/Button.jsx";
-import Card from "../../components/Card/Card.jsx";
-import CardBody from "../../components/Card/CardBody.jsx";
-import CardHeader from "../../components/Card/CardHeader.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput";
-import logo from "../../assets/img/logo-color2.svg";
-import { connect } from "react-redux";
-import { login } from "../../actions/auth";
-import { newPath } from "../../actions/path";
-import loginPageStyle from "../../assets/jss/material-kit-pro-react/views/loginPageStyle.jsx";
-import image from "../../assets/img/login-picture.jpg";
-import { Link, Redirect } from "react-router-dom";
+import Header from '../../components/Header/Header.jsx';
+import HeaderLinks from '../../components/Header/HeaderLinks.jsx';
+import GridContainer from '../../components/Grid/GridContainer.jsx';
+import GridItem from '../../components/Grid/GridItem.jsx';
+import Button from '../../components/CustomButtons/Button.jsx';
+import Card from '../../components/Card/Card.jsx';
+import CardBody from '../../components/Card/CardBody.jsx';
+import CardHeader from '../../components/Card/CardHeader.jsx';
+import CustomInput from '../../components/CustomInput/CustomInput';
+import logo from '../../assets/img/logo-color2.svg';
+import { connect } from 'react-redux';
+import { login, loginFacebook } from '../../actions/auth';
+import { newPath } from '../../actions/path';
+import loginPageStyle from '../../assets/jss/material-kit-pro-react/views/loginPageStyle.jsx';
+import image from '../../assets/img/login-picture.jpg';
+import { Link, Redirect } from 'react-router-dom';
 
 class LoginPage extends React.Component {
   state = {
-    username: "",
-    password: ""
+    username: '',
+    password: '',
+    email: ''
   };
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -36,20 +37,37 @@ class LoginPage extends React.Component {
 
   onHandleClick = e => {
     e.preventDefault();
-    this.props.login(this.state.username, this.state.password);
+    this.props.login(
+      this.state.username,
+      this.state.password,
+      this.state.email
+    );
+  };
+  onHandleClickFacebook = e => {
+    e.preventDefault();
+    this.props.loginFacebook();
   };
 
-  onChange = e =>
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  onChange = e => {
+    if (e.target.value.indexOf('@') > -1 && e.target.value.indexOf('.') > -1) {
+      this.setState({
+        email: e.target.value,
+        [e.target.name]: ''
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value,
+        email: ''
+      });
+    }
+  };
 
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to="/" />;
     }
     const { classes } = this.props;
-    const { username, password } = this.state;
+    const { username, password, email } = this.state;
     return (
       <div>
         <Header
@@ -61,9 +79,9 @@ class LoginPage extends React.Component {
         <div
           className={classes.pageHeader}
           style={{
-            backgroundImage: "url(" + image + ")",
-            backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundImage: 'url(' + image + ')',
+            backgroundSize: 'cover',
+            backgroundPosition: 'top center'
           }}
         >
           <div className={classes.container}>
@@ -90,7 +108,7 @@ class LoginPage extends React.Component {
                           justIcon
                           color="transparent"
                           className={classes.iconButtons}
-                          onClick={e => e.preventDefault()}
+                          onClick={this.onHandleClickFacebook}
                         >
                           <i className="fab fa-facebook" />
                         </Button>
@@ -117,10 +135,10 @@ class LoginPage extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          placeholder: "Username...",
-                          type: "text",
-                          name: "username",
-                          value: username,
+                          placeholder: 'Username or Email',
+                          type: 'text',
+                          name: 'username',
+                          value: email === '' ? username : email,
                           onChange: this.onChange,
                           startAdornment: (
                             <InputAdornment position="start">
@@ -136,9 +154,9 @@ class LoginPage extends React.Component {
                         }}
                         success
                         inputProps={{
-                          placeholder: "Password",
-                          type: "password",
-                          name: "password",
+                          placeholder: 'Password',
+                          type: 'password',
+                          name: 'password',
                           value: password,
                           onChange: this.onChange,
                           startAdornment: (
@@ -183,6 +201,6 @@ const mapStateToProps = state => ({
 export default withStyles(loginPageStyle)(
   connect(
     mapStateToProps,
-    { login, newPath }
+    { login, loginFacebook, newPath }
   )(LoginPage)
 );

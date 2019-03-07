@@ -8,9 +8,6 @@ verify_ssl = true
 [packages]
 django = "==2.1.7"
 stripe = "*"
-django-crispy-forms = "*"
-libsass = "*"
-django-sass-processor = "*"
 psycopg2-binary = "*"
 coverage = "*"
 djangorestframework = "*"

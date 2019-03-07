@@ -28,9 +28,11 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 INSTALLED_APPS = [
-    'sass_processor',
     'orders.apps.OrdersConfig',
     'geo.apps.GeoConfig',
     'django.contrib.admin',
@@ -41,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'users.apps.UsersConfig',
-    'crispy_forms',
     'allauth',
     'allauth.account',
     'rest_framework',
@@ -53,19 +54,19 @@ INSTALLED_APPS = [
     'knox',
     'accounts',
     'corsheaders',
-    'lead'
 ]
 SITE_ID = 1
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
-}
-
 AUTH_USER_MODEL = 'users.CustomUser'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
+}
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # new
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -161,12 +162,8 @@ MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'media')
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'sass_processor.finders.CssFinder',
 ]
 
-SASS_PRECISION = 8
-SASS_OUTPUT_STYLE = 'compact'
-SASS_PROCESSOR_ROOT = 'orders/static'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -174,7 +171,7 @@ EMAIL_HOST_USER = 'robert.baguette.delivery@gmail.com'
 EMAIL_HOST_PASSWORD = 'A8x422xz@'
 EMAIL_PORT = 587
 
-LOGIN_REDIRECT_URL = '/order'
-LOGOUT_REDIRECT_URL = '/'
 
-SELENIUM_LOGIN_START_PAGE = ''
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
+}

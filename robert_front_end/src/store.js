@@ -9,7 +9,7 @@ import LogRocket from 'logrocket';
 const rootPersistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['order', 'errors', 'path', 'items']
+  blacklist: ['messages', 'order', 'errors', 'path', 'items', 'auth', 'areas']
 };
 const pReducer = persistReducer(rootPersistConfig, rootReducer);
 

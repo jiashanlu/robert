@@ -1,7 +1,9 @@
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
 
 # register API
 
@@ -20,6 +22,7 @@ class RegisterAPI(generics.GenericAPIView):
 
     # login API
 
+
 class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
@@ -33,13 +36,5 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 
-    # Get User API
-class UserAPI(generics.RetrieveAPIView):
-    permission_classes = [
-        permissions.IsAuthenticated,
-    ]
-    serializer_class = UserSerializer
-
-    def get_object(self):
-        return self.request.user
-
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter

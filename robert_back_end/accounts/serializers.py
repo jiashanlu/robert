@@ -5,10 +5,10 @@ from django.contrib.auth import authenticate
 # user serializer
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'email', 'ratio', 'balance')
+        fields = '__all__'
 
 # register serializer
 
