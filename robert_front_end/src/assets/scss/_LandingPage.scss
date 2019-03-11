@@ -8,7 +8,9 @@
   padding: 2vw;
 }
 .pac-container {
-  background-color: gray !important;
+  background-color: white !important;
+  color: black !important;
+  z-index: 10051 !important;
 }
 
 @media screen and (max-width: 979px) /* Tablet */ {

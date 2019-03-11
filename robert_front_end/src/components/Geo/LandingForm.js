@@ -2,12 +2,13 @@ import React from 'react';
 /* global google */
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import { connect } from 'react-redux';
 import { confirmInArea } from '../../actions/areas';
 import { checkAreas } from '../../components/Geo/CheckArea';
 import { withRouter } from 'react-router';
+import { returnErrors } from '../../actions/messages';
+import TextField from '@material-ui/core/TextField';
 
 import Button from '../../components/CustomButtons/Button.jsx';
 
@@ -19,7 +20,7 @@ const styles = {
     width: 400
   },
   input: {
-    marginLeft: 8,
+    // marginLeft: 8,
     flex: 1
   },
   iconButton: {
@@ -32,30 +33,42 @@ const styles = {
   }
 };
 
-class IndexForm extends React.Component {
+class LandingForm extends React.Component {
   constructor(props) {
     super(props);
     this.autocompleteInput = React.createRef();
     this.autocomplete = null;
-    this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
   }
+  state = {
+    input: this.props.textValue || ''
+  };
 
   componentDidMount() {
     this.autocomplete = new google.maps.places.Autocomplete(
       this.autocompleteInput.current,
       { types: ['geocode'] }
     );
-
     this.autocomplete.addListener('place_changed', this.handlePlaceChanged);
   }
 
-  handlePlaceChanged() {
-    const place = this.autocomplete.getPlace();
+  handlePlaceChanged = async () => {
+    if (!this.props.withButton) {
+      await this.handleClick();
+      this.setState({
+        input: this.props.textValue || ''
+      });
+    }
+  };
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      input: nextProps.textValue || ''
+    });
   }
 
   handleClick = () => {
     const address = this.autocomplete.getPlace();
     checkAreas(
+      'geo',
       address,
       this.props.areas.areas,
       async addr => {
@@ -64,43 +77,82 @@ class IndexForm extends React.Component {
       },
       no => {
         this.props.confirmInArea();
-        // set address to null
+        this.setState({
+          input: ''
+        });
+      },
+      err => {
+        this.props.returnErrors({
+          addressIncorrect: 'The address format looks incorrect!'
+        });
+        this.setState({
+          input: ''
+        });
       }
     );
   };
 
+  onChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+  onFocus = () => {
+    this.setState({
+      input: ''
+    });
+  };
+  button = (
+    <Button
+      onClick={this.handleClick}
+      color="success"
+      size="lg"
+      href=""
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i className="fas fa-play" />
+      Try Now !
+    </Button>
+  );
+
   render() {
-    const { classes } = this.props;
+    const { classes, withButton, areas } = this.props;
     return (
       <div className="form-post">
         <FormControl fullWidth>
-          <Input
+          <TextField
+            autoFocus
+            onFocus={this.onFocus}
+            variant="outlined"
+            margin="dense"
+            required
+            label="Address"
+            error={
+              areas.testAddress !== ''
+                ? areas.testAddress.geometry.location === ''
+                  ? true
+                  : false
+                : false
+            }
+            value={this.state.input}
+            onChange={this.onChange}
+            name="input"
             inputRef={this.autocompleteInput}
             placeholder="Test your location here .."
-            className={classes.input}
             inputProps={{
               'aria-label': 'Is Robert available?'
             }}
           />
-          <br />
-          <Button
-            onClick={this.handleClick}
-            color="success"
-            size="lg"
-            href=""
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fas fa-play" />
-            Try Now !
-          </Button>
         </FormControl>
+        {withButton ? <br /> : ''}
+        {withButton ? this.button : ''}
       </div>
     );
   }
 }
 
-IndexForm.propTypes = {
+LandingForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
@@ -111,7 +163,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { confirmInArea }
-    )(IndexForm)
+      { confirmInArea, returnErrors }
+    )(LandingForm)
   )
 );

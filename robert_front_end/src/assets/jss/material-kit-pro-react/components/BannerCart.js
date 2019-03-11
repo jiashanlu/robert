@@ -13,15 +13,16 @@ import {
 } from '../../material-kit-pro-react';
 
 import imageStyles from '../imagesStyles.jsx';
-
+import modalStyle from '../modalStyle';
 import rotatingCards from '../rotatingCards';
 
-const styles = {
+const styles = theme => ({
   container,
   coloredShadow,
   title,
   mlAuto,
   cardTitle,
+  ...modalStyle(theme),
   ...imageStyles,
   ...rotatingCards,
   sectionGray: {
@@ -200,6 +201,6 @@ const styles = {
   marginBottom20: {
     marginBottom: '20px'
   }
-};
+});
 
 export default styles;

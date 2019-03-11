@@ -64,7 +64,7 @@ class LoginPage extends React.Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to="/order" />;
     }
     const { classes } = this.props;
     const { username, password, email } = this.state;

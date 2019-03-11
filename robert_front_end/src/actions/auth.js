@@ -21,7 +21,6 @@ export const login = (username, password, email) => dispatch => {
   };
   // Request Body
   const body = JSON.stringify({ username, password, email });
-  console.log(body);
   axios
     .post('http://localhost:8000/rest-auth/login/', body, config)
     .then(res => {
@@ -141,6 +140,5 @@ export const tokenConfig = getState => {
   if (token) {
     config.headers['Authorization'] = `Token ${token}`;
   }
-  console.log(config);
   return config;
 };

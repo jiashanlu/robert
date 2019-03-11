@@ -5,32 +5,31 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import Icon from '@material-ui/core/Icon';
 
 import infoStyle from '../../assets/jss/material-kit-pro-react/components/infoStyle.jsx';
 
 function InfoArea({ ...props }) {
-  const { classes, title, description, iconColor, vertical, className } = props;
-  const iconWrapper = classNames({
-    [classes.iconWrapper]: true,
-    [classes[iconColor]]: true,
-    [classes.iconWrapperVertical]: vertical
-  });
-  const iconClasses = classNames({
-    [classes.icon]: true,
-    [classes.iconVertical]: vertical
-  });
+  const { classes, title, description, className } = props;
+  // // const iconWrapper = classNames({
+  //   [classes.iconWrapper]: true,
+  //   [classes[iconColor]]: true,
+  //   [classes.iconWrapperVertical]: vertical
+  // });
+  // const iconClasses = classNames({
+  //   [classes.icon]: true,
+  //   [classes.iconVertical]: vertical
+  // });
   const infoAreaClasses = classNames({
     [classes.infoArea]: true,
     [className]: className !== undefined
   });
-  let icon = null;
+  // let icon = null;
   switch (typeof props.icon) {
     case 'string':
-      icon = <Icon className={iconClasses}>{props.icon}</Icon>;
+      // icon = <Icon className={iconClasses}>{props.icon}</Icon>;
       break;
     default:
-      icon = <props.icon className={iconClasses} />;
+      // icon = <props.icon className={iconClasses} />;
       break;
   }
   return (

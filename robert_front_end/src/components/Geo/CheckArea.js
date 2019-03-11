@@ -1,25 +1,49 @@
-import React from 'react';
 /* global google */
+/* eslint no-loop-func: 0*/
 
-const checkArea = (address, area, callback) => {
+const checkArea = (type, address, area, callback) => {
+  const geocoder = new google.maps.Geocoder();
   let polyArea = new google.maps.Polygon({ paths: area });
-  if (
-    google.maps.geometry.poly.containsLocation(
-      address.geometry.location,
-      polyArea
-    )
-  ) {
-    callback(address);
+  if (type === 'location') {
+    geocoder.geocode({ [type]: address }, function(results, status) {
+      if (status === 'OK') {
+        if (
+          google.maps.geometry.poly.containsLocation(
+            results[0].geometry.location,
+            polyArea
+          )
+        ) {
+          callback(results[0]);
+        } else {
+          callback(1);
+        }
+      } else {
+        callback('error');
+      }
+    });
   } else {
-    callback(1);
+    try {
+      if (
+        google.maps.geometry.poly.containsLocation(
+          address.geometry.location,
+          polyArea
+        )
+      ) {
+        callback(address);
+      } else {
+        callback(1);
+      }
+    } catch {
+      callback('error');
+    }
   }
 };
 
-export function checkAreas(address, areas, yes, no) {
+export const checkAreas = (type, address, areas, yes, no, err) => {
   let check = 0;
   let error = 0;
   for (let i = 0; i < areas.length; i++) {
-    checkArea(address, areas[i].co, addr => {
+    checkArea(type, address, areas[i].co, addr => {
       if (addr === 'error') {
         error++;
       } else if (addr === 1) {
@@ -31,10 +55,10 @@ export function checkAreas(address, areas, yes, no) {
         no();
       }
       if (error === areas.length) {
-        alert('The address format looks incorrect, try again');
+        err();
       }
     });
   }
-}
+};
 
 export default checkArea;

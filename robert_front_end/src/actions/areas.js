@@ -1,4 +1,3 @@
-/* global google */
 import axios from 'axios';
 import { returnErrors, createMessage } from './messages';
 import { GET_AREAS, SET_TEST_ADDRESS } from './types';

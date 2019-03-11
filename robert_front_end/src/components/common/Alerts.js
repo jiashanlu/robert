@@ -10,7 +10,7 @@ export class Alerts extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, alert, message } = this.props;
+    const { error, alert, message, path } = this.props;
     if (error !== prevProps.error) {
       if (error.msg.name) alert.error(`Name: ${error.msg.name[0]}`);
       if (error.msg.email) alert.error(`Email: ${error.msg.email.join()}`);
@@ -19,14 +19,15 @@ export class Alerts extends Component {
       if (error.msg.non_field_errors)
         alert.error(error.msg.non_field_errors.join());
       if (error.msg.username) alert.error(error.msg.username.join());
-      if (error.msg.notAvailable) alert.error(error.msg.notAvailable);
+      if (error.msg.notAvailable && path.pathName !== '/order')
+        alert.error(error.msg.notAvailable);
+      if (error.msg.addressIncorrect && path.pathName !== '/order')
+        alert.error(error.msg.addressIncorrect);
     }
     if (message !== prevProps.message) {
-      if (message.deleteLead) alert.success(message.deleteLead);
-      if (message.leadAdded) alert.success(message.leadAdded);
-      if (message.passwordsNotMatch) alert.error(message.passwordsNotMatch);
       if (message.termsnotagreed) alert.error(message.termsnotagreed);
-      if (message.AddressOK) alert.success(message.AddressOK);
+      if (message.AddressOK && path.pathName !== '/order')
+        alert.success(message.AddressOK);
     }
   }
 
@@ -37,7 +38,8 @@ export class Alerts extends Component {
 
 const mapStateToProps = state => ({
   error: state.errors,
-  message: state.messages
+  message: state.messages,
+  path: state.path
 });
 
 export default connect(mapStateToProps)(withAlert()(Alerts));

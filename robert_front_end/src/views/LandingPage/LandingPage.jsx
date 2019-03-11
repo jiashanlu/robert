@@ -8,11 +8,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Header from '../../components/Header/Header.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
 import GridItem from '../../components/Grid/GridItem.jsx';
-import Button from '../../components/CustomButtons/Button.jsx';
 import HeaderLinks from '../../components/Header/HeaderLinks.jsx';
 import Parallax from '../../components/Parallax/Parallax.jsx';
 import logo from '../../assets/img/logo-color2.svg';
-import Form from '../../components/Geo/LandingForm';
+import LandingForm from '../../components/Geo/LandingForm';
 import Footer from '../../components/Footer/Footer';
 import { connect } from 'react-redux';
 import landingPageStyle from '../../assets/jss/material-kit-pro-react/views/landingPageStyle.jsx';
@@ -20,8 +19,6 @@ import { newPath } from '../../actions/path';
 
 // Sections for this page
 import SectionProduct from './Sections/SectionProduct.jsx';
-// import SectionTeam from "./Sections/SectionTeam.jsx";
-// import SectionWork from "./Sections/SectionWork.jsx";
 
 class LandingPage extends React.Component {
   componentDidMount() {
@@ -58,7 +55,7 @@ class LandingPage extends React.Component {
                   way than if you live in France!
                 </h4>
                 <br />
-                <Form className="form-landing" />
+                <LandingForm withButton className="form-landing" />
               </GridItem>
             </GridContainer>
           </div>
@@ -66,8 +63,6 @@ class LandingPage extends React.Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <SectionProduct />
-            {/* <SectionTeam /> */}
-            {/* <SectionWork /> */}
           </div>
         </div>
         <br />

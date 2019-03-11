@@ -14,7 +14,6 @@ import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 import Moment from 'react-moment';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import OrderConfirm from '../../components/OrderConfirm/OrderConfirm';
 export class BannerCart extends Component {
   constructor(props) {
@@ -59,6 +58,10 @@ export class BannerCart extends Component {
     return (
       <GridContainer justify="center">
         <Dialog
+          classes={{
+            root: classes.modalRoot,
+            paper: classes.modal + ' ' + classes.modalLarge
+          }}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
