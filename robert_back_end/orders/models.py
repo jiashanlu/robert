@@ -41,8 +41,7 @@ class Address (models.Model):
     area = models.CharField(max_length=64)
     housing = models.CharField(
         max_length=5, choices=HOUSING_CHOICES, default='VILLA')
-    floor_nbr = models.CharField(max_length=64, null=True)
-    counpound_name = models.CharField(max_length=64, null=True)
+    counpound_building_name = models.CharField(max_length=64, null=True)
     apt_villa_nbr = models.IntegerField(null=True)
     details = models.CharField(max_length=512, null=True)
     json_geocode = JSONField(null=True)
@@ -53,9 +52,9 @@ class Address (models.Model):
 
 class Preference (models.Model):
     DELIVERY_CHOICES = (
-        ('AM', 'from 4:00 a.m. to 6:00 a.m.'),
-        ('NOON', 'from 11:00 a.m. to 12:00 p.m.'),
-        ('PM', 'from 15:00 p.m. to 16:00 p.m.'),
+        ('AM', 'from 4:00 a.m. to 7:00 a.m.'),
+        ('NOON', 'from 10:30 a.m. to 11:30 a.m.'),
+        ('PM', 'from 18:00 p.m. to 20:00 p.m.'),
     )
     RECEPTION_CHOICES = (
         ('R', 'ring the bell'),

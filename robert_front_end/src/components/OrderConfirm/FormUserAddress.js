@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Map from '../Geo/Map';
 import LandingForm from '../Geo/LandingForm';
 import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
 
 export class FormUserAddress extends Component {
   continue = e => {
@@ -14,12 +15,8 @@ export class FormUserAddress extends Component {
     this.props.nextStep();
   };
 
-  back = e => {
-    e.preventDefault();
-    this.props.prevStep();
-  };
   componentWillReceiveProps(newProps) {
-    if (newProps.values.route === 'route') {
+    if (newProps.values.street_number === '') {
       setTimeout(() => {
         this.textField.focus();
       }, 100);
@@ -31,12 +28,39 @@ export class FormUserAddress extends Component {
     return (
       <Fragment>
         <DialogTitle id="form-dialog-title">
-          I need to get to know you better!
+          Confirm your name & location
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>Select / confirm your location</DialogContentText>
-          <Map default_address={values.default_address} />
           <Grid container spacing={8}>
+            <Grid item xs={12} sm={6}>
+              <FormControl required>
+                <TextField
+                  fullWidth
+                  required
+                  label="First Name"
+                  margin="dense"
+                  value={values.first_name}
+                  onChange={handleChange('first_name')}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                value={values.last_name}
+                onChange={handleChange('last_name')}
+                required
+                label="Last Name"
+                margin="dense"
+              />
+            </Grid>
+            <br />
+            <Grid item xs={12} sm={12}>
+              <DialogContentText>
+                Drag the marker on the map or type in the street field
+              </DialogContentText>
+            </Grid>
+            <Map default_address={values.default_address} />
             <Grid item xs={12} sm={2}>
               <TextField
                 type="number"
@@ -73,8 +97,9 @@ export class FormUserAddress extends Component {
             </Grid>
           </Grid>
           <br />
-          <Button onClick={this.continue}>Continue</Button>
-          <Button onClick={this.back}>Back</Button>
+          <Button type="submit" onClick={this.continue}>
+            Continue
+          </Button>
         </DialogContent>
       </Fragment>
     );

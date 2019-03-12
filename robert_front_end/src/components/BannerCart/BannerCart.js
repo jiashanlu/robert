@@ -15,6 +15,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Moment from 'react-moment';
 import Dialog from '@material-ui/core/Dialog';
 import OrderConfirm from '../../components/OrderConfirm/OrderConfirm';
+import OrderDetails from './OrderDetails';
 export class BannerCart extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +67,7 @@ export class BannerCart extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <OrderConfirm />
+          <OrderConfirm total={total} order={order} date={date} />
         </Dialog>
         <GridItem>
           <div
@@ -84,25 +85,7 @@ export class BannerCart extends Component {
                     alignItems="flex-start"
                   >
                     <Grid item xs={12} sm={8} md={5}>
-                      {order.map((item, index) => (
-                        <b key={item.id}>
-                          {item.qty}{' '}
-                          {item.qty > 1 ? item.name + 's' : item.name}
-                          {index < order.length - 1 ? ', ' : ''}
-                        </b>
-                      ))}
-                      <br />
-                      <span>
-                        {total === 0 ? (
-                          <b>Your Cart is empty, let's have a try!</b>
-                        ) : (
-                          <span>
-                            Total
-                            <small> (before discount) : </small>
-                            {total} AED
-                          </span>
-                        )}
-                      </span>
+                      <OrderDetails total={total} order={order} />
                       <br />
                       <br />
                       <Button

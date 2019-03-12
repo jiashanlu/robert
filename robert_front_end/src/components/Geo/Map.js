@@ -58,7 +58,7 @@ class Map extends React.Component {
     return (
       <this.RegularMap
         loadingElement={<div style={{ height: '100%' }} />}
-        containerElement={<div style={{ height: '20vw', width: '30vw' }} />}
+        containerElement={<div style={{ height: '30vw', width: '100%' }} />}
         mapElement={<div style={{ height: '100%' }} />}
       />
     );

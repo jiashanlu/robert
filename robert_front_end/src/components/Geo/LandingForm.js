@@ -40,7 +40,8 @@ class LandingForm extends React.Component {
     this.autocomplete = null;
   }
   state = {
-    input: this.props.textValue || ''
+    input: this.props.textValue || '',
+    blured: false
   };
 
   componentDidMount() {
@@ -98,8 +99,15 @@ class LandingForm extends React.Component {
     });
   };
   onFocus = () => {
+    if (this.state.blured) {
+      this.setState({
+        input: ''
+      });
+    }
+  };
+  onBlur = () => {
     this.setState({
-      input: ''
+      blured: true
     });
   };
   button = (
@@ -124,10 +132,11 @@ class LandingForm extends React.Component {
           <TextField
             autoFocus
             onFocus={this.onFocus}
+            onBlur={this.onBlur}
             variant="outlined"
             margin="dense"
             required
-            label="Address"
+            label="Street"
             error={
               areas.testAddress !== ''
                 ? areas.testAddress.geometry.location === ''

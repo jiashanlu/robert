@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import FormUserAdress from './FormUserAddress';
+import FormUserAddress from './FormUserAddress';
+import FormUserAddress2 from './FormUserAddress2';
+import FormUserRecap from './FormUserRecap';
 import { connect } from 'react-redux';
 
 class OrderConfirm extends Component {
@@ -8,17 +10,20 @@ class OrderConfirm extends Component {
     route: '',
     default_address: { lat: 25.1714393, lng: 55.22058549 },
     street_number: '',
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     street: '',
     area: '',
     city: '',
     housing: '',
-    floor_nbr: '',
-    counpound_name: '',
+    counpound_building_name: '',
     apt_villa_nbr: '',
     details: '',
-    json_geocode: ''
+    json_geocode: '',
+    delivery_choice: '',
+    reception_choice: '',
+    preference_default: true,
+    address_default: true
   };
   update = Props => {
     const { address_components, geometry, types } = Props.areas.testAddress;
@@ -79,49 +84,82 @@ class OrderConfirm extends Component {
   handleChange = input => e => {
     this.setState({ [input]: e.target.value });
   };
+  handleCheck = input => e => {
+    this.setState({ [input]: e.target.checked });
+  };
 
   render() {
+    const { order, total, date } = this.props;
     const { step } = this.state;
     const {
       default_address,
       route,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       street,
       street_number,
       area,
       city,
       housing,
-      floor_nbr,
-      counpound_name,
+      counpound_building_name,
       apt_villa_nbr,
       details,
-      json_geocode
+      json_geocode,
+      delivery_choice,
+      reception_choice,
+      preference_default,
+      address_default
     } = this.state;
     const values = {
       route,
       default_address,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       street,
       street_number,
       area,
       city,
       housing,
-      floor_nbr,
-      counpound_name,
+      counpound_building_name,
       apt_villa_nbr,
       details,
-      json_geocode
+      json_geocode,
+      delivery_choice,
+      reception_choice,
+      preference_default,
+      address_default
     };
 
     switch (step) {
       case 1:
         return (
-          <FormUserAdress
+          <FormUserAddress
             nextStep={this.nextStep}
             handleChange={this.handleChange}
+            handleCheck={this.handleCheck}
             values={values}
+          />
+        );
+      case 2:
+        return (
+          <FormUserAddress2
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChange={this.handleChange}
+            handleCheck={this.handleCheck}
+            values={values}
+          />
+        );
+      case 3:
+        return (
+          <FormUserRecap
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChange={this.handleChange}
+            values={values}
+            order={order}
+            total={total}
+            date={date}
           />
         );
       default:
