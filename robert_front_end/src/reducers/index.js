@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
+import { reducer as formReducer } from 'redux-form';
 
 import storage from 'redux-persist/lib/storage';
 import errors from './errors';
@@ -23,5 +24,6 @@ export default combineReducers({
   path,
   items,
   order: persistReducer(orderPersistConfig, order),
-  areas
+  areas,
+  form: formReducer
 });

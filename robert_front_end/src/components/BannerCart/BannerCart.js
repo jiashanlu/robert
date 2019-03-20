@@ -48,6 +48,7 @@ export class BannerCart extends Component {
     this.setState({ open: true });
   };
   handleClose = () => {
+    console.log('test');
     this.setState({ open: false });
   };
 
@@ -67,7 +68,12 @@ export class BannerCart extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <OrderConfirm total={total} order={order} date={date} />
+          <OrderConfirm
+            handleClose={this.handleClose}
+            total={total}
+            order={order}
+            date={date}
+          />
         </Dialog>
         <GridItem>
           <div

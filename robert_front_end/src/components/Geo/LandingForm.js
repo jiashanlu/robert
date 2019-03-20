@@ -54,7 +54,8 @@ class LandingForm extends React.Component {
 
   handlePlaceChanged = async () => {
     if (!this.props.withButton) {
-      await this.handleClick();
+      const onMap = true;
+      await this.handleClick(onMap);
       this.setState({
         input: this.props.textValue || ''
       });
@@ -66,7 +67,7 @@ class LandingForm extends React.Component {
     });
   }
 
-  handleClick = () => {
+  handleClick = onMap => {
     const address = this.autocomplete.getPlace();
     checkAreas(
       'geo',
@@ -77,10 +78,22 @@ class LandingForm extends React.Component {
         this.props.history.push('/order');
       },
       no => {
-        this.props.confirmInArea();
-        this.setState({
-          input: ''
-        });
+        if (onMap) {
+          this.props.confirmInArea({
+            address_components: [
+              {
+                long_name: 'not available yet! try another address',
+                types: ['route']
+              }
+            ],
+            geometry: { location: '' }
+          });
+        } else {
+          this.props.confirmInArea();
+          this.setState({
+            input: ''
+          });
+        }
       },
       err => {
         this.props.returnErrors({
@@ -125,7 +138,7 @@ class LandingForm extends React.Component {
   );
 
   render() {
-    const { classes, withButton, areas } = this.props;
+    const { withButton, areas } = this.props;
     return (
       <div className="form-post">
         <FormControl fullWidth>
@@ -135,8 +148,8 @@ class LandingForm extends React.Component {
             onBlur={this.onBlur}
             variant="outlined"
             margin="dense"
-            required
             label="Street"
+            required
             error={
               areas.testAddress !== ''
                 ? areas.testAddress.geometry.location === ''

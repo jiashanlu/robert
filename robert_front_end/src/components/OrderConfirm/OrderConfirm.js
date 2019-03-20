@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 class OrderConfirm extends Component {
   state = {
     step: 1,
+    phone_number: '',
     route: '',
     default_address: { lat: 25.1714393, lng: 55.22058549 },
     street_number: '',
@@ -65,31 +66,34 @@ class OrderConfirm extends Component {
     this.update(nextProps);
   }
   // Proceed to next step
-  nextStep = () => {
+  nextStep = values => {
     const { step } = this.state;
+    if (values) {
+      this.setState(values);
+    }
     this.setState({
       step: step + 1
     });
   };
 
   // Go back to prev step
-  prevStep = () => {
+  prevStep = values => {
     const { step } = this.state;
+    if (values) {
+      this.setState(values);
+    }
     this.setState({
       step: step - 1
     });
   };
-
-  // Handle fields change
-  handleChange = input => e => {
-    this.setState({ [input]: e.target.value });
-  };
-  handleCheck = input => e => {
-    this.setState({ [input]: e.target.checked });
+  initialState = () => {
+    this.setState({
+      step: 1
+    });
   };
 
   render() {
-    const { order, total, date } = this.props;
+    const { order, total, date, handleClose } = this.props;
     const { step } = this.state;
     const {
       default_address,
@@ -108,7 +112,8 @@ class OrderConfirm extends Component {
       delivery_choice,
       reception_choice,
       preference_default,
-      address_default
+      address_default,
+      phone_number
     } = this.state;
     const values = {
       route,
@@ -127,35 +132,27 @@ class OrderConfirm extends Component {
       delivery_choice,
       reception_choice,
       preference_default,
-      address_default
+      address_default,
+      phone_number
     };
 
     switch (step) {
       case 1:
-        return (
-          <FormUserAddress
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            handleCheck={this.handleCheck}
-            values={values}
-          />
-        );
+        return <FormUserAddress nextStep={this.nextStep} values={values} />;
       case 2:
         return (
           <FormUserAddress2
             nextStep={this.nextStep}
             prevStep={this.prevStep}
-            handleChange={this.handleChange}
-            handleCheck={this.handleCheck}
             values={values}
           />
         );
       case 3:
         return (
           <FormUserRecap
-            nextStep={this.nextStep}
+            handleClose={handleClose}
+            initialState={this.initialState}
             prevStep={this.prevStep}
-            handleChange={this.handleChange}
             values={values}
             order={order}
             total={total}
