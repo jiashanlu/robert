@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { returnErrors, createMessage } from './messages';
-import { GET_AREAS, SET_TEST_ADDRESS } from './types';
+import { GET_AREAS } from './types';
 
 // GET AREAS
 export const getAreas = () => dispatch => {
@@ -15,24 +15,4 @@ export const getAreas = () => dispatch => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
-};
-
-export const confirmInArea = addr => dispatch => {
-  if (addr) {
-    dispatch({
-      type: SET_TEST_ADDRESS,
-      payload: addr
-    });
-    dispatch(
-      createMessage({
-        AddressOK: 'Good news! Robert delivers here! start our services now!'
-      })
-    );
-  } else {
-    dispatch(
-      returnErrors({
-        notAvailable: 'Not yet available, try another address or comeback later'
-      })
-    );
-  }
 };

@@ -1,8 +1,7 @@
-import { GET_AREAS, SET_TEST_ADDRESS } from '../actions/types.js';
+import { GET_AREAS } from '../actions/types.js';
 
 const initialState = {
-  areas: [],
-  testAddress: ''
+  areas: []
 };
 
 export default function(state = initialState, action) {
@@ -11,11 +10,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         areas: action.payload
-      };
-    case SET_TEST_ADDRESS:
-      return {
-        ...state,
-        testAddress: action.payload
       };
     default:
       return state;

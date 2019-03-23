@@ -24,7 +24,7 @@ export class BannerCart extends Component {
       activeRotate1: '',
       activeRotate2: '',
       startDate: new Date()
-    };
+    };-
   }
   componentDidMount = () => {
     const { classes } = this.props;

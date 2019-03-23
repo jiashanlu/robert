@@ -2,28 +2,39 @@ import React from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import { checkAreas } from '../Geo/CheckArea';
 import { returnErrors } from '../../actions/messages';
-import { confirmInArea } from '../../actions/areas';
 import { connect } from 'react-redux';
+import { change } from 'redux-form';
 
 class Map extends React.Component {
+  state = {
+    co: { lat: 25.1714393, lng: 55.22058549 }
+  };
+
   onDragEnd = evt => {
     const { areas } = this.props.areas;
     checkAreas(
+      '',
       'location',
       evt.latLng,
       areas,
       async addr => {
-        await this.props.confirmInArea(addr);
+        await this.props.confirmInArea(addr.object);
+        this.props.change('FormUserAddress', 'street', addr.street);
+        this.props.change(
+          'FormUserAddress',
+          'street_number',
+          addr.street_number
+        );
+        this.props.change('FormUserAddress', 'area', addr.area);
+        this.props.change('FormUserAddress', 'city', addr.city);
       },
       no => {
-        this.props.confirmInArea({
-          address_components: [
-            {
-              long_name: 'not available yet! try another address',
-              types: ['route']
-            }
-          ],
-          geometry: { location: '' }
+        this.props.change('FormUserAddress', 'street', 'not yet available');
+        this.props.change('FormUserAddress', 'area', '');
+        this.props.change('FormUserAddress', 'city', '');
+        this.props.change('FormUserAddress', 'street_number', '000');
+        this.setState({
+          co: { lat: 25.1714393, lng: 55.22058549 }
         });
       },
       err => {
@@ -34,23 +45,15 @@ class Map extends React.Component {
     );
   };
 
-  RegularMap = withGoogleMap(props => (
+  RegularMap = withGoogleMap(() => (
     <GoogleMap
       defaultZoom={15}
-      center={
-        this.props.default_address || { lat: 25.1714393, lng: 55.22058549 }
-      }
+      center={this.state.co}
       defaultOptions={{
         scrollwheel: true
       }}
     >
-      <Marker
-        position={
-          this.props.default_address || { lat: 25.1714393, lng: 55.22058549 }
-        }
-        draggable
-        onDragEnd={this.onDragEnd}
-      />
+      <Marker position={this.state.co} draggable onDragEnd={this.onDragEnd} />
     </GoogleMap>
   ));
 
@@ -71,5 +74,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { confirmInArea, returnErrors }
+  { returnErrors, change }
 )(Map);

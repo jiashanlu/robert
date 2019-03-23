@@ -10,6 +10,7 @@ import path from './path';
 import items from './items';
 import order from './order';
 import areas from './areas';
+import forms from './forms';
 
 const orderPersistConfig = {
   key: 'order',
@@ -25,5 +26,6 @@ export default combineReducers({
   items,
   order: persistReducer(orderPersistConfig, order),
   areas,
-  form: formReducer
+  form: formReducer,
+  forms
 });

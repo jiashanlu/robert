@@ -2,13 +2,12 @@ import React from 'react';
 /* global google */
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
 import { connect } from 'react-redux';
-import { confirmInArea } from '../../actions/areas';
 import { checkAreas } from '../../components/Geo/CheckArea';
 import { withRouter } from 'react-router';
-import { returnErrors } from '../../actions/messages';
+import { returnErrors, createMessage } from '../../actions/messages';
 import TextField from '@material-ui/core/TextField';
+import { change } from 'redux-form';
 
 import Button from '../../components/CustomButtons/Button.jsx';
 
@@ -20,7 +19,6 @@ const styles = {
     width: 400
   },
   input: {
-    // marginLeft: 8,
     flex: 1
   },
   iconButton: {
@@ -40,8 +38,7 @@ class LandingForm extends React.Component {
     this.autocomplete = null;
   }
   state = {
-    input: this.props.textValue || '',
-    blured: false
+    nbr: ''
   };
 
   componentDidMount() {
@@ -56,72 +53,65 @@ class LandingForm extends React.Component {
     if (!this.props.withButton) {
       const onMap = true;
       await this.handleClick(onMap);
-      this.setState({
-        input: this.props.textValue || ''
-      });
     }
   };
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      input: nextProps.textValue || ''
-    });
-  }
 
-  handleClick = onMap => {
+  handleClick = async onMap => {
+    // const { dataForm } = this.props || '';
+    // if (dataForm !== '') {
+    //   if (/\d/.test(dataForm.value)) {
+    //     await this.setState({
+    //       nbr: dataForm.value.match(/\d+/)[0]
+    //     });
+    //   }
+    // }
+    const nbr = this.state.nbr;
     const address = this.autocomplete.getPlace();
     checkAreas(
+      nbr,
       'geo',
       address,
       this.props.areas.areas,
       async addr => {
-        await this.props.confirmInArea(addr);
+        this.props.change('FormUserAddress', 'street', addr.street);
+        this.props.change(
+          'FormUserAddress',
+          'street_number',
+          addr.street_number
+        );
+        this.props.change('FormUserAddress', 'area', addr.area);
+        this.props.change('FormUserAddress', 'city', addr.city);
         this.props.history.push('/order');
+        this.props.createMessage({
+          AddressOK: 'Good news! Robert delivers here! start our services now!'
+        });
       },
       no => {
-        if (onMap) {
-          this.props.confirmInArea({
-            address_components: [
-              {
-                long_name: 'not available yet! try another address',
-                types: ['route']
-              }
-            ],
-            geometry: { location: '' }
-          });
-        } else {
-          this.props.confirmInArea();
-          this.setState({
-            input: ''
-          });
-        }
+        this.props.change('FormUserAddress', 'street', '');
+        this.props.change('FormUserAddress', 'area', '');
+        this.props.change('FormUserAddress', 'city', '');
+        this.props.change('FormUserAddress', 'street_number', '');
+        this.props.returnErrors({
+          notAvailable:
+            'Not yet available, try another address or comeback later'
+        });
       },
       err => {
         this.props.returnErrors({
           addressIncorrect: 'The address format looks incorrect!'
         });
-        this.setState({
-          input: ''
-        });
+        this.props.change('FormUserAddress', 'street', '');
+        this.props.change('FormUserAddress', 'area', '');
+        this.props.change('FormUserAddress', 'city', '');
+        this.props.change('FormUserAddress', 'street_number', '');
       }
     );
   };
 
-  onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
   onFocus = () => {
-    if (this.state.blured) {
-      this.setState({
-        input: ''
-      });
-    }
-  };
-  onBlur = () => {
-    this.setState({
-      blured: true
-    });
+    this.props.change('FormUserAddress', 'street', '');
+    this.props.change('FormUserAddress', 'area', '');
+    this.props.change('FormUserAddress', 'city', '');
   };
   button = (
     <Button
@@ -138,35 +128,22 @@ class LandingForm extends React.Component {
   );
 
   render() {
-    const { withButton, areas } = this.props;
+    const { withButton, dataForm, label, custom } = this.props;
+    const { touched, invalid, error } = this.props.meta || '';
     return (
       <div className="form-post">
-        <FormControl fullWidth>
-          <TextField
-            autoFocus
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            variant="outlined"
-            margin="dense"
-            label="Street"
-            required
-            error={
-              areas.testAddress !== ''
-                ? areas.testAddress.geometry.location === ''
-                  ? true
-                  : false
-                : false
-            }
-            value={this.state.input}
-            onChange={this.onChange}
-            name="input"
-            inputRef={this.autocompleteInput}
-            placeholder="Test your location here .."
-            inputProps={{
-              'aria-label': 'Is Robert available?'
-            }}
-          />
-        </FormControl>
+        <TextField
+          {...dataForm}
+          {...custom}
+          error={touched && invalid}
+          helperText={touched && error}
+          fullWidth
+          onFocus={this.onFocus}
+          variant="outlined"
+          margin="dense"
+          label={label}
+          inputRef={this.autocompleteInput}
+        />
         {withButton ? <br /> : ''}
         {withButton ? this.button : ''}
       </div>
@@ -185,7 +162,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { confirmInArea, returnErrors }
+      { returnErrors, createMessage, change }
     )(LandingForm)
   )
 );
