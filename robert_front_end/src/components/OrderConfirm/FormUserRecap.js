@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 import { newOrder } from '../../actions/orders';
 
 class FormUserRecap extends Component {
-  continue = e => {
+  continue = async e => {
     e.preventDefault();
     const {
       street_number,
@@ -41,10 +41,9 @@ class FormUserRecap extends Component {
     } = this.props.values;
     const date = moment(this.props.order.date).format('YYYY-MM-DD');
     const geocode_string = JSON.stringify(geocode);
-    const test = 'test';
     const data = {
       user: {
-        phone_number: test,
+        phone_number,
         first_name,
         last_name
       },
@@ -54,7 +53,7 @@ class FormUserRecap extends Component {
       },
       orderitem: [],
       delivery_address: {
-        geocode: test,
+        geocode: geocode_string,
         street_number,
         street,
         area,
@@ -79,7 +78,8 @@ class FormUserRecap extends Component {
       });
     }
     console.log(data);
-    this.props.newOrder(data);
+    await this.props.newOrder(data);
+    this.props.nextStep();
   };
   back = e => {
     e.preventDefault();
@@ -139,7 +139,7 @@ class FormUserRecap extends Component {
                 </ListItem>
                 <ListItem>
                   <ListItemIcon>
-                    <LocalShippingIcon />
+                    <HomeIcon />
                   </ListItemIcon>
                   <ListItemText
                     primary={`${values.street_number}, ${values.street}, ${
@@ -152,7 +152,7 @@ class FormUserRecap extends Component {
                 </ListItem>
                 <ListItem>
                   <ListItemIcon>
-                    <HomeIcon />
+                    <LocalShippingIcon />
                   </ListItemIcon>
                   <ListItemText
                     primary={`will be deliver within ${

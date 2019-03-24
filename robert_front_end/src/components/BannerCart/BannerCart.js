@@ -16,6 +16,7 @@ import Moment from 'react-moment';
 import Dialog from '@material-ui/core/Dialog';
 import OrderConfirm from '../../components/OrderConfirm/OrderConfirm';
 import OrderDetails from './OrderDetails';
+import SignupPage from '../../views/SignupPage/SignupPage';
 export class BannerCart extends Component {
   constructor(props) {
     super(props);

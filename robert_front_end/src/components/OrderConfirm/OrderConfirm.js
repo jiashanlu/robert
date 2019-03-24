@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import FormUserAddress from './FormUserAddress';
 import FormUserAddress2 from './FormUserAddress2';
 import FormUserRecap from './FormUserRecap';
+import Confirm from './Confirm';
 import { connect } from 'react-redux';
 import { formValidated } from '../../actions/order';
+import { Redirect } from 'react-router-dom';
 
 class OrderConfirm extends Component {
   state = {
@@ -11,7 +13,11 @@ class OrderConfirm extends Component {
   };
 
   componentDidMount = () => {
-    if (this.props.form_validated) {
+    if (this.props.tomorrow_done) {
+      this.setState({
+        step: 4
+      });
+    } else if (this.props.form_validated) {
       this.setState({
         step: 3
       });
@@ -44,6 +50,9 @@ class OrderConfirm extends Component {
   };
 
   render() {
+    if (!this.props.isAuthenticated) {
+      return <Redirect to="/signUp" />;
+    }
     const { handleClose } = this.props;
     const { step } = this.state;
 
@@ -59,9 +68,12 @@ class OrderConfirm extends Component {
           <FormUserRecap
             handleClose={handleClose}
             initialState={this.initialState}
+            nextStep={this.nextStep}
             prevStep={this.prevStep}
           />
         );
+      case 4:
+        return <Confirm handleClose={handleClose} />;
       default:
         return '';
     }
@@ -70,7 +82,9 @@ class OrderConfirm extends Component {
 
 const mapStateToProps = state => ({
   areas: state.areas,
-  form_validated: state.order.form_validated
+  isAuthenticated: state.auth.isAuthenticated,
+  form_validated: state.order.form_validated,
+  tomorrow_done: state.orders.tomorrow_done
 });
 
 export default connect(

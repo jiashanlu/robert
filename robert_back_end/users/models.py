@@ -26,7 +26,7 @@ class CustomUser(AbstractUser):
         Membership, on_delete=models.SET_NULL, related_name="membership", blank=True, null=True)
     ratio = models.DecimalField(max_digits=3, decimal_places=2, default=0)
     email_confirmed = models.BooleanField(default=False)
-    phone_number = models.CharField(max_length=13, null=True, blank=True)
+    phone_number = models.CharField(max_length=18, null=True, blank=True)
     address = models.ForeignKey(
         Address, on_delete=models.SET_NULL, related_name="address", blank=True, null=True)
     preference = models.ForeignKey(

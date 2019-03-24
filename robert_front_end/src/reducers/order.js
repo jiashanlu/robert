@@ -3,24 +3,18 @@ import {
   UPDATE_TOTAL,
   FORM_VALIDATED
 } from '../actions/types.js';
+
 const date = {
   now: new Date(),
-  tommorow() {
+  tomorrow() {
     return new Date(this.now.getTime() + 24 * 60 * 60 * 1000);
-  },
-  format(date) {
-    let month = ('0' + (date.getMonth() + 1)).slice(-2);
-    let day = ('0' + date.getDate()).slice(-2);
-    let year = date.getFullYear();
-    let dateStr = year + '-' + month + '-' + day;
-    return dateStr;
   }
 };
 
 const initialState = {
   order: [],
   total: 0,
-  date: new Date(date.tommorow()),
+  date: new Date(date.tomorrow()),
   form_validated: false
 };
 
