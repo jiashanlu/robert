@@ -46,7 +46,7 @@ class Address (models.Model):
     counpound_building_name = models.CharField(max_length=64, null=True)
     apt_villa_nbr = models.IntegerField(null=True)
     details = models.CharField(max_length=512, null=True)
-    json_geocode = JSONField(null=True)
+    geocode = models.CharField(max_length=64, null=True)
     user = models.ForeignKey(
         'users.CustomUser', on_delete=models.CASCADE, related_name="user_address", null=True)
 

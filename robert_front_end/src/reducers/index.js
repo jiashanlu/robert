@@ -9,12 +9,13 @@ import auth from './auth';
 import path from './path';
 import items from './items';
 import order from './order';
+import orders from './orders';
 import areas from './areas';
 
 const orderPersistConfig = {
   key: 'order',
   storage: storage,
-  whitelist: ['order', 'total']
+  whitelist: ['order', 'total', 'form_validated']
 };
 
 export default combineReducers({
@@ -24,6 +25,7 @@ export default combineReducers({
   path,
   items,
   order: persistReducer(orderPersistConfig, order),
+  orders,
   areas,
   form: formReducer
 });

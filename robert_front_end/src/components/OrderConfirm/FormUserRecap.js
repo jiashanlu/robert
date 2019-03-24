@@ -12,9 +12,11 @@ import Grid from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Moment from 'react-moment';
+import moment from 'moment';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import OrderDetails from '../BannerCart/OrderDetails';
 import { connect } from 'react-redux';
+import { newOrder } from '../../actions/orders';
 
 class FormUserRecap extends Component {
   continue = e => {
@@ -28,7 +30,7 @@ class FormUserRecap extends Component {
       counpound_building_name,
       apt_villa_nbr,
       details,
-      json_geocode,
+      geocode,
       delivery_choice,
       reception_choice,
       preference_default,
@@ -36,10 +38,13 @@ class FormUserRecap extends Component {
       phone_number,
       first_name,
       last_name
-    } = this.props;
+    } = this.props.values;
+    const date = moment(this.props.order.date).format('YYYY-MM-DD');
+    const geocode_string = JSON.stringify(geocode);
+    const test = 'test';
     const data = {
       user: {
-        phone_number,
+        phone_number: test,
         first_name,
         last_name
       },
@@ -47,8 +52,9 @@ class FormUserRecap extends Component {
         preference_default,
         address_default
       },
-      ordered_item: [],
-      address: {
+      orderitem: [],
+      delivery_address: {
+        geocode: test,
         street_number,
         street,
         area,
@@ -56,23 +62,24 @@ class FormUserRecap extends Component {
         housing,
         counpound_building_name,
         apt_villa_nbr,
-        details,
-        json_geocode
+        details
       },
-      preferences: {
+      delivery_preference: {
         delivery_choice,
         reception_choice
-      }
+      },
+      date
     };
     const orders = this.props.order.order.filter(order => order.qty > 0);
     let i;
     for (i in orders) {
-      data.ordered_item.push({
+      data.orderitem.push({
         qty: orders[i].qty,
-        id: orders[i].id
+        item: orders[i].id
       });
     }
     console.log(data);
+    this.props.newOrder(data);
   };
   back = e => {
     e.preventDefault();
@@ -183,4 +190,7 @@ const mapStateToProps = state => ({
   order: state.order
 });
 
-export default connect(mapStateToProps)(FormUserRecap);
+export default connect(
+  mapStateToProps,
+  { newOrder }
+)(FormUserRecap);

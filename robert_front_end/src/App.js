@@ -30,11 +30,11 @@ const alertOptions = {
 };
 
 class App extends Component {
-  componentDidMount() {
+  componentDidMount = getState => {
     store.dispatch(loadUser());
     store.dispatch(getItems());
     store.dispatch(getAreas());
-  }
+  };
 
   render() {
     return (

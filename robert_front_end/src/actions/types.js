@@ -15,3 +15,6 @@ export const UPDATE_TOTAL = 'UPDATE_TOTAL';
 export const GET_AREAS = 'GET_AREAS';
 export const UPDATE_CO = 'UPDATE_CO';
 export const FORM_VALIDATED = 'FORM_VALIDATED';
+export const GET_ORDERS = 'GET_ORDERS';
+export const NEW_ORDER = 'NEW_ORDER';
+export const CLEAN_ORDERS = 'CLEAN_ORDERS';

@@ -86,6 +86,7 @@ class LandingForm extends React.Component {
         );
         this.props.change('FormUserAddress', 'area', addr.area);
         this.props.change('FormUserAddress', 'city', addr.city);
+        this.props.change('FormUserAddress', 'geocode', addr.co);
         this.props.updateCo(addr.co);
         this.props.history.push('/order');
         this.props.createMessage({
@@ -97,6 +98,7 @@ class LandingForm extends React.Component {
         this.props.change('FormUserAddress', 'area', '');
         this.props.change('FormUserAddress', 'city', '');
         this.props.change('FormUserAddress', 'street_number', '');
+        this.props.change('FormUserAddress', 'geocode', '');
         this.props.returnErrors({
           notAvailable:
             'Not yet available, try another address or comeback later'
@@ -110,6 +112,7 @@ class LandingForm extends React.Component {
         this.props.change('FormUserAddress', 'area', '');
         this.props.change('FormUserAddress', 'city', '');
         this.props.change('FormUserAddress', 'street_number', '');
+        this.props.change('FormUserAddress', 'geocode', '');
       }
     );
   };
@@ -118,6 +121,7 @@ class LandingForm extends React.Component {
     this.props.change('FormUserAddress', 'street', '');
     this.props.change('FormUserAddress', 'area', '');
     this.props.change('FormUserAddress', 'city', '');
+    this.props.change('FormUserAddress', 'geocode', '');
   };
   button = (
     <Button

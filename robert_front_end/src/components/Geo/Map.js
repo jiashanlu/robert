@@ -20,10 +20,12 @@ class Map extends React.Component {
           'street_number',
           addr.street_number
         );
+        this.props.change('FormUserAddress', 'geocode', addr.co);
         this.props.change('FormUserAddress', 'area', addr.area);
         this.props.change('FormUserAddress', 'city', addr.city);
       },
       no => {
+        this.props.change('FormUserAddress', 'geocode', '');
         this.props.change('FormUserAddress', 'street', 'not yet available');
         this.props.change('FormUserAddress', 'area', '');
         this.props.change('FormUserAddress', 'city', '');

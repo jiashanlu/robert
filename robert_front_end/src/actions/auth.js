@@ -10,6 +10,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL
 } from './types';
+import { getOrders, cleanOrders } from './orders';
 
 // LOGIN USER
 export const login = (username, password, email) => dispatch => {
@@ -93,7 +94,7 @@ export const register = ({
 };
 
 // LOGOUT USER
-export const logout = () => (dispatch, getState) => {
+export const logout = () => dispatch => {
   axios
     .post('http://localhost:8000/rest-auth/logout/')
     .then(res => {
@@ -101,6 +102,7 @@ export const logout = () => (dispatch, getState) => {
         type: LOGOUT_SUCCESS
       });
     })
+    .then(dispatch(cleanOrders()))
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
     });
@@ -118,6 +120,7 @@ export const loadUser = () => (dispatch, getState) => {
         payload: res.data
       });
     })
+    .then(dispatch(getOrders()))
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
