@@ -1,4 +1,8 @@
-import { UPDATE_ORDER, UPDATE_TOTAL } from '../actions/types.js';
+import {
+  UPDATE_ORDER,
+  UPDATE_TOTAL,
+  FORM_VALIDATED
+} from '../actions/types.js';
 const date = {
   now: new Date(),
   tommorow() {
@@ -16,7 +20,8 @@ const date = {
 const initialState = {
   order: [],
   total: 0,
-  date: new Date(date.tommorow())
+  date: new Date(date.tommorow()),
+  form_validated: false
 };
 
 export default function(state = initialState, action) {
@@ -36,6 +41,11 @@ export default function(state = initialState, action) {
           (preVal, elem) => preVal + Number(elem.price * elem.qty),
           0
         )
+      };
+    case FORM_VALIDATED:
+      return {
+        ...state,
+        form_validated: action.payload
       };
     default:
       return state;

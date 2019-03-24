@@ -9,10 +9,6 @@ import Map from '../Geo/Map';
 import LandingForm from '../Geo/LandingForm';
 import Grid from '@material-ui/core/Grid';
 
-const onSubmit = props => {
-  this.props.nextStep();
-};
-
 const validate = values => {
   const errors = {};
   const requiredFields = ['street_number', 'street'];
@@ -49,9 +45,13 @@ const LandingFormField = ({ label, input, meta, ...custom }) => (
   <LandingForm dataForm={input} meta={meta} label={label} custom={custom} />
 );
 const FormUserAddress = props => {
-  const { handleSubmit, pristine, submitting, default_address } = props;
+  const { handleSubmit, pristine, submitting, nextStep } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit(() => {
+        nextStep();
+      })}
+    >
       <Fragment>
         <DialogTitle id="form-dialog-title">
           Confirm your name & location
@@ -63,7 +63,7 @@ const FormUserAddress = props => {
                 Drag the marker on the map or type in the street field
               </DialogContentText>
             </Grid>
-            <Map default_address={default_address} />
+            <Map />
             <Grid item xs={12} sm={2}>
               <Field
                 type="number"

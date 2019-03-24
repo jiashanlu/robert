@@ -3,9 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import { updateCo } from '../../actions/areas';
 import { checkAreas } from '../../components/Geo/CheckArea';
 import { withRouter } from 'react-router';
 import { returnErrors, createMessage } from '../../actions/messages';
+import { formValidated } from '../../actions/order';
 import TextField from '@material-ui/core/TextField';
 import { change } from 'redux-form';
 
@@ -49,22 +51,25 @@ class LandingForm extends React.Component {
     this.autocomplete.addListener('place_changed', this.handlePlaceChanged);
   }
 
-  handlePlaceChanged = async () => {
+  handlePlaceChanged = () => {
     if (!this.props.withButton) {
-      const onMap = true;
-      await this.handleClick(onMap);
+      this.handleClick();
     }
   };
 
-  handleClick = async onMap => {
-    // const { dataForm } = this.props || '';
-    // if (dataForm !== '') {
-    //   if (/\d/.test(dataForm.value)) {
-    //     await this.setState({
-    //       nbr: dataForm.value.match(/\d+/)[0]
-    //     });
-    //   }
-    // }
+  handleClick = async () => {
+    if (!this.props.withButton) {
+      const { dataForm } = this.props || '';
+      if (dataForm !== '') {
+        if (/\d/.test(dataForm.value)) {
+          await this.setState({
+            nbr: dataForm.value.match(/\d+/)[0]
+          });
+        }
+      }
+    } else {
+      this.props.formValidated(false);
+    }
     const nbr = this.state.nbr;
     const address = this.autocomplete.getPlace();
     checkAreas(
@@ -81,6 +86,7 @@ class LandingForm extends React.Component {
         );
         this.props.change('FormUserAddress', 'area', addr.area);
         this.props.change('FormUserAddress', 'city', addr.city);
+        this.props.updateCo(addr.co);
         this.props.history.push('/order');
         this.props.createMessage({
           AddressOK: 'Good news! Robert delivers here! start our services now!'
@@ -162,7 +168,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { returnErrors, createMessage, change }
+      { returnErrors, createMessage, change, updateCo, formValidated }
     )(LandingForm)
   )
 );

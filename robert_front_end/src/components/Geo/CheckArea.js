@@ -40,7 +40,6 @@ const checkArea = (type, address, area, callback) => {
 };
 
 export const checkAreas = (nbr, type, address, areas, yes, no, err) => {
-  console.log(address);
   let check = 0;
   let error = 0;
   for (let i = 0; i < areas.length; i++) {

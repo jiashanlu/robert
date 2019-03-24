@@ -24,7 +24,7 @@ export class BannerCart extends Component {
       activeRotate1: '',
       activeRotate2: '',
       startDate: new Date()
-    };-
+    };
   }
   componentDidMount = () => {
     const { classes } = this.props;
@@ -48,7 +48,6 @@ export class BannerCart extends Component {
     this.setState({ open: true });
   };
   handleClose = () => {
-    console.log('test');
     this.setState({ open: false });
   };
 
@@ -68,12 +67,7 @@ export class BannerCart extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <OrderConfirm
-            handleClose={this.handleClose}
-            total={total}
-            order={order}
-            date={date}
-          />
+          <OrderConfirm handleClose={this.handleClose} />
         </Dialog>
         <GridItem>
           <div

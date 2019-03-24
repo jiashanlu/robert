@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 import { change } from 'redux-form';
 
 class Map extends React.Component {
-  state = {
-    co: { lat: 25.1714393, lng: 55.22058549 }
-  };
-
   onDragEnd = evt => {
     const { areas } = this.props.areas;
     checkAreas(
@@ -18,7 +14,6 @@ class Map extends React.Component {
       evt.latLng,
       areas,
       async addr => {
-        await this.props.confirmInArea(addr.object);
         this.props.change('FormUserAddress', 'street', addr.street);
         this.props.change(
           'FormUserAddress',
@@ -48,12 +43,16 @@ class Map extends React.Component {
   RegularMap = withGoogleMap(() => (
     <GoogleMap
       defaultZoom={15}
-      center={this.state.co}
+      center={this.props.areas.co}
       defaultOptions={{
         scrollwheel: true
       }}
     >
-      <Marker position={this.state.co} draggable onDragEnd={this.onDragEnd} />
+      <Marker
+        position={this.props.areas.co}
+        draggable
+        onDragEnd={this.onDragEnd}
+      />
     </GoogleMap>
   ));
 

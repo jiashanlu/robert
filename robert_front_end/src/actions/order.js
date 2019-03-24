@@ -1,4 +1,4 @@
-import { UPDATE_ORDER, UPDATE_TOTAL } from "./types";
+import { UPDATE_ORDER, UPDATE_TOTAL, FORM_VALIDATED } from './types';
 
 export const updateOrder = update => {
   return dispatch => {
@@ -8,6 +8,15 @@ export const updateOrder = update => {
     });
     dispatch({
       type: UPDATE_TOTAL
+    });
+  };
+};
+
+export const formValidated = action => {
+  return dispatch => {
+    dispatch({
+      type: FORM_VALIDATED,
+      payload: action
     });
   };
 };

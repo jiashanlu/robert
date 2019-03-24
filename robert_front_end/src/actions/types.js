@@ -13,4 +13,5 @@ export const GET_ITEMS = 'GET_ITEMS';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const UPDATE_TOTAL = 'UPDATE_TOTAL';
 export const GET_AREAS = 'GET_AREAS';
-export const LOAD_ORDER_FORM = 'LOAD_ORDER_FORM';
+export const UPDATE_CO = 'UPDATE_CO';
+export const FORM_VALIDATED = 'FORM_VALIDATED';

@@ -14,8 +14,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Moment from 'react-moment';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import OrderDetails from '../BannerCart/OrderDetails';
+import { connect } from 'react-redux';
 
-export class FormUserAddress2 extends Component {
+class FormUserRecap extends Component {
   continue = e => {
     e.preventDefault();
     const {
@@ -35,7 +36,7 @@ export class FormUserAddress2 extends Component {
       phone_number,
       first_name,
       last_name
-    } = this.props.values;
+    } = this.props;
     const data = {
       user: {
         phone_number,
@@ -63,7 +64,7 @@ export class FormUserAddress2 extends Component {
         reception_choice
       }
     };
-    const orders = this.props.order.filter(order => order.qty > 0);
+    const orders = this.props.order.order.filter(order => order.qty > 0);
     let i;
     for (i in orders) {
       data.ordered_item.push({
@@ -71,7 +72,7 @@ export class FormUserAddress2 extends Component {
         id: orders[i].id
       });
     }
-    console.log(orders, data);
+    console.log(data);
   };
   back = e => {
     e.preventDefault();
@@ -82,7 +83,9 @@ export class FormUserAddress2 extends Component {
   };
 
   render() {
-    const { values, order, total, date, handleClose } = this.props;
+    const { values, handleClose } = this.props;
+    const { total, date } = this.props.order;
+    const order = this.props.order.order.filter(order => order.qty > 0);
     return (
       <Fragment>
         <DialogTitle>Confirmation</DialogTitle>
@@ -175,4 +178,9 @@ export class FormUserAddress2 extends Component {
   }
 }
 
-export default FormUserAddress2;
+const mapStateToProps = state => ({
+  values: state.form.FormUserAddress.values,
+  order: state.order
+});
+
+export default connect(mapStateToProps)(FormUserRecap);

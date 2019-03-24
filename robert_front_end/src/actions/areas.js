@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { returnErrors, createMessage } from './messages';
-import { GET_AREAS } from './types';
+import { returnErrors } from './messages';
+import { GET_AREAS, UPDATE_CO } from './types';
 
 // GET AREAS
 export const getAreas = () => dispatch => {
@@ -15,4 +15,13 @@ export const getAreas = () => dispatch => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+export const updateCo = co => {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_CO,
+      payload: co
+    });
+  };
 };
