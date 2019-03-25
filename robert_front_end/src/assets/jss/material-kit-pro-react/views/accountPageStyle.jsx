@@ -6,7 +6,7 @@ import {
   mainRaised
 } from '../../material-kit-pro-react.jsx';
 
-const orderPageStyle = {
+const accountPageStyle = {
   container: {
     color: 'inherit',
     ...container,
@@ -74,4 +74,4 @@ const orderPageStyle = {
   }
 };
 
-export default orderPageStyle;
+export default accountPageStyle;

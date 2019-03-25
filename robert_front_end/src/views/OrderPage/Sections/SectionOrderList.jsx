@@ -23,11 +23,11 @@ class SectionOrderList extends React.Component {
 
     return (
       <div className={classes.section}>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={12}>
+        <Grid container justify="center">
+          <Grid item xs={12} sm={12} md={12}>
             <BannerCart />
-          </GridItem>
-        </GridContainer>
+          </Grid>
+        </Grid>
         <Grid container alignItems="baseline" justify="space-between">
           <Grid item xs={12} sm={7} md={7}>
             <Quote

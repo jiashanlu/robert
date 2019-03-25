@@ -1,3 +1,12 @@
 .DayPicker {
   font-size: 0.8vw;
 }
+.MuiDialog-paper-383 {
+  margin-bottom: 100vw !important;
+}
+
+@media screen and (max-width: 736px) /* iphone + */ {
+  .MuiDialog-paper-383 {
+    margin: 5px !important;
+  }
+}

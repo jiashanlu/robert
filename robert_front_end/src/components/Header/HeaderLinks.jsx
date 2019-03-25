@@ -23,7 +23,7 @@ import Build from '@material-ui/icons/Build';
 import CustomDropdown from '../CustomDropdown/CustomDropdown.jsx';
 import Button from '../CustomButtons/Button.jsx';
 import { logout } from '../../actions/auth';
-
+import { newAccountTab } from '../../actions/path';
 import headerLinksStyle from '../../assets/jss/material-kit-pro-react/components/headerLinksStyle.jsx';
 
 function HeaderLinks({ ...props }) {
@@ -66,7 +66,7 @@ function HeaderLinks({ ...props }) {
   };
 
   var onClickSections = {};
-  const { classes, dropdownHoverColor } = props;
+  const { classes, dropdownHoverColor, newAccountTab } = props;
   const { isAuthenticated, user } = props.auth;
   const loggedIn = (
     <Link to="/login">
@@ -112,18 +112,33 @@ function HeaderLinks({ ...props }) {
       }}
       buttonIcon={Apps}
       dropdownList={[
-        <Link to="#" className={classes.dropdownLink}>
+        <Link
+          to="/account"
+          onClick={() => props.newAccountTab(1)}
+          className={classes.dropdownLink}
+        >
           <AccountCircle className={classes.dropdownIcons} /> Profile
         </Link>,
-        <Link to="#" className={classes.dropdownLink}>
+        <Link
+          to="/account"
+          onClick={() => props.newAccountTab(2)}
+          className={classes.dropdownLink}
+        >
           <Build className={classes.dropdownIcons} /> Preferences
         </Link>,
-        <Link to="#" className={classes.dropdownLink}>
+        <Link
+          to="/account"
+          onClick={() => props.newAccountTab(3)}
+          className={classes.dropdownLink}
+        >
           <Layers className={classes.dropdownIcons} />
           Auto-Order
         </Link>,
-
-        <Link to="#" className={classes.dropdownLink}>
+        <Link
+          to="/account"
+          onClick={() => props.newAccountTab(4)}
+          className={classes.dropdownLink}
+        >
           <Assignment className={classes.dropdownIcons} />
           Order History
         </Link>
@@ -171,6 +186,6 @@ const mapStateToProps = state => ({
 export default withStyles(headerLinksStyle)(
   connect(
     mapStateToProps,
-    { logout }
+    { logout, newAccountTab }
   )(HeaderLinks)
 );

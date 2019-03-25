@@ -18,3 +18,4 @@ export const FORM_VALIDATED = 'FORM_VALIDATED';
 export const GET_ORDERS = 'GET_ORDERS';
 export const NEW_ORDER = 'NEW_ORDER';
 export const CLEAN_ORDERS = 'CLEAN_ORDERS';
+export const NEW_ACCOUNT_TAB = 'NEW_ACCOUNT_TAB';

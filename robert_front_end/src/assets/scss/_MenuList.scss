@@ -1,0 +1,14 @@
+.account-section {
+  margin-top: -50px !important;
+  text-align: center;
+}
+@media screen and (max-width: 736px) /* iphone + */ {
+  .list-account-menu-custom {
+    div {
+      display: inline-block;
+    }
+  }
+  .account-section {
+    margin-top: 0px !important;
+  }
+}

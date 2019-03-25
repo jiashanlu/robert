@@ -12,7 +12,7 @@ import {
 
 const style = {
   rotatingCardContainer: {
-    perspective: '800px',
+    // perspective: '800px',
     '& $cardRotate $back': {
       transform: 'rotateY(180deg)',
       zIndex: '5',

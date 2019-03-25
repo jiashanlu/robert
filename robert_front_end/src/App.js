@@ -16,6 +16,7 @@ import LandingPage from './views/LandingPage/LandingPage';
 import SignupPage from './views/SignupPage/SignupPage';
 import LoginPage from './views/LoginPage/LoginPage';
 import OrderPage from './views/OrderPage/OrderPage';
+import AccountPage from './views/AccountPage/AccountPage';
 import Alerts from './components/Common/Alerts';
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
@@ -53,6 +54,7 @@ class App extends Component {
                       <Route exact path="/login" component={LoginPage} />
                       <Route exact path="/signup" component={SignupPage} />
                       <Route exact path="/order" component={OrderPage} />
+                      <Route exact path="/account" component={AccountPage} />
                     </Switch>
                   </div>
                   <br />
