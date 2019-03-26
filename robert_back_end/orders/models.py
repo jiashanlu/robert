@@ -9,25 +9,6 @@ class Item (models.Model):
     name = models.CharField(max_length=64)
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
-    # def save(self, *args, **kwargs):
-    #     CustomUser = apps.get_model('users', 'CustomUser')
-    #     users = CustomUser.objects.all()
-    #     super(Item, self).save(*args, **kwargs)
-    #     for U in users:
-    #         items = U.default_order.ordered_item.all()
-    #         if self not in items:
-    #             OI = OrderItem.objects.create(item=self, qty=0)
-    #             OI.save()
-    #             U.default_order.orderitem_set.add(OI)
-    #             U.save()
-
-    # def as_dict(self):
-    #     return {
-    #         "type": self.type,
-    #         "name": self.name,
-    #         "price": self.price
-    #     }
-
     def __str__(self):
         return f"{self.type}, {self.name}, {self.price}"
 
@@ -87,19 +68,7 @@ class Order (models.Model):
         Address, on_delete=models.CASCADE, related_name="delivery_address", null=True)
     delivery_preference = models.ForeignKey(
         Preference, on_delete=models.CASCADE, related_name="delivery_preference", null=True)
-    str = models.CharField(max_length=512, null=True)
-
-    @property
-    def total(self):
-        result = 0
-        for OI in self.orderitem_set.all():
-            result = result + (OI.qty * OI.item.price)
-        if self.customer:
-            if self.customer.membership:
-                discount = self.customer.membership.discount
-                discounted = round((discount * result), 2)
-                result = result - discounted
-        return result
+    total = models.DecimalField(max_digits=7, decimal_places=2, default=0)
 
     def __str__(self):
         return f"{self.id}, {self.date}"

@@ -18,11 +18,7 @@ import LoginPage from './views/LoginPage/LoginPage';
 import OrderPage from './views/OrderPage/OrderPage';
 import AccountPage from './views/AccountPage/AccountPage';
 import Alerts from './components/Common/Alerts';
-import LogRocket from 'logrocket';
-import setupLogRocketReact from 'logrocket-react';
-
-LogRocket.init('w39fwu/robert');
-setupLogRocketReact(LogRocket);
+import Starter from '../src/components/Starter/Starter';
 
 // Alert Options
 const alertOptions = {
@@ -31,7 +27,7 @@ const alertOptions = {
 };
 
 class App extends Component {
-  componentDidMount = getState => {
+  componentWillMount = () => {
     store.dispatch(loadUser());
     store.dispatch(getItems());
     store.dispatch(getAreas());
@@ -45,21 +41,23 @@ class App extends Component {
             {' '}
             {/* loading={<LoadingView />} */}
             <AlertProvider template={AlertTemplate} {...alertOptions}>
-              <Router>
-                <Fragment>
-                  <Alerts />
-                  <div>
-                    <Switch>
-                      <Route exact path="/" component={LandingPage} />
-                      <Route exact path="/login" component={LoginPage} />
-                      <Route exact path="/signup" component={SignupPage} />
-                      <Route exact path="/order" component={OrderPage} />
-                      <Route exact path="/account" component={AccountPage} />
-                    </Switch>
-                  </div>
-                  <br />
-                </Fragment>
-              </Router>
+              <Starter>
+                <Router>
+                  <Fragment>
+                    <Alerts />
+                    <div>
+                      <Switch>
+                        <Route exact path="/" component={LandingPage} />
+                        <Route exact path="/login" component={LoginPage} />
+                        <Route exact path="/signup" component={SignupPage} />
+                        <Route exact path="/order" component={OrderPage} />
+                        <Route exact path="/account" component={AccountPage} />
+                      </Switch>
+                    </div>
+                    <br />
+                  </Fragment>
+                </Router>
+              </Starter>
             </AlertProvider>
           </PersistGate>
         </Provider>

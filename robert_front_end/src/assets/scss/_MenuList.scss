@@ -1,6 +1,8 @@
 .account-section {
-  margin-top: -50px !important;
+  margin-top: -40px !important;
+  min-height: 800px;
   text-align: center;
+  padding: 3px;
 }
 @media screen and (max-width: 736px) /* iphone + */ {
   .list-account-menu-custom {

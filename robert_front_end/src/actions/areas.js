@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { returnErrors } from './messages';
-import { GET_AREAS, UPDATE_CO } from './types';
+import { GET_AREAS, UPDATE_CO, AREAS_LOADING } from './types';
 
 // GET AREAS
 export const getAreas = () => dispatch => {
+  dispatch({ type: AREAS_LOADING });
   axios
     .get('http://localhost:8000/api/areas')
     .then(res => {

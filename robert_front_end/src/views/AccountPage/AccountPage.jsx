@@ -63,7 +63,7 @@ class AccountPage extends React.Component {
               <MenuList />
             </Grid>
             <Grid item item xs={12} sm={12} className="account-section">
-              <SectionsSwitch />
+              <SectionsSwitch className="account-container" />
             </Grid>
           </Grid>
         </div>

@@ -1,4 +1,9 @@
-import { GET_ORDERS, NEW_ORDER, CLEAN_ORDERS } from '../actions/types.js';
+import {
+  GET_ORDERS,
+  NEW_ORDER,
+  CLEAN_ORDERS,
+  DELETE_ORDER
+} from '../actions/types.js';
 import moment from 'moment';
 const initialState = {
   tomorrow_done: false
@@ -21,6 +26,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         last_order: action.payload
+      };
+    case DELETE_ORDER:
+      return {
+        ...state,
+        last_order: ''
       };
     case CLEAN_ORDERS:
       return {

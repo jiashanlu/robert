@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { returnErrors } from './messages';
-import { GET_ORDERS, NEW_ORDER, CLEAN_ORDERS } from './types';
+import { GET_ORDERS, NEW_ORDER, CLEAN_ORDERS, DELETE_ORDER } from './types';
 import { tokenConfig } from './auth';
 
 // GET ITEMS
@@ -32,6 +32,22 @@ export const newOrder = data => (dispatch, getState) => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
+
+export const deleteOrder = id => (dispatch, getState) => {
+  axios
+    .delete(`http://localhost:8000/api/order/${id}/`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: DELETE_ORDER,
+        payload: id
+      });
+      dispatch(getOrders());
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
 export const cleanOrders = () => {
   return {
     type: CLEAN_ORDERS,

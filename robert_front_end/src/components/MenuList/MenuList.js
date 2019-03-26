@@ -27,7 +27,6 @@ const styles = theme => ({
 });
 
 const handdleClick = (event, s, props) => {
-  console.log('s');
   event.preventDefault();
   event.persist();
   props.newAccountTab(s);

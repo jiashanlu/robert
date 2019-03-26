@@ -4,7 +4,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import LogRocket from 'logrocket';
 
 const rootPersistConfig = {
   key: 'root',
@@ -22,7 +21,7 @@ const rootPersistConfig = {
 };
 const pReducer = persistReducer(rootPersistConfig, rootReducer);
 
-const middleware = [thunk, LogRocket.reduxMiddleware()];
+const middleware = [thunk];
 export const store = createStore(
   pReducer,
   composeWithDevTools(applyMiddleware(...middleware))

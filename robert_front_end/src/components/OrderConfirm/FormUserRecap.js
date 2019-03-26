@@ -41,6 +41,7 @@ class FormUserRecap extends Component {
     } = this.props.values;
     const date = moment(this.props.order.date).format('YYYY-MM-DD');
     const geocode_string = JSON.stringify(geocode);
+    const { total } = this.props.order;
     const data = {
       user: {
         phone_number,
@@ -67,7 +68,8 @@ class FormUserRecap extends Component {
         delivery_choice,
         reception_choice
       },
-      date
+      date,
+      total
     };
     const orders = this.props.order.order.filter(order => order.qty > 0);
     let i;
