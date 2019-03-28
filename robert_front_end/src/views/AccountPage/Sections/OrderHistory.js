@@ -37,7 +37,12 @@ const OrderHistory = props => {
     </a>
   );
   return (
-    <Grid className="account-section" container alignContent="flex-start">
+    <Grid
+      className="account-section"
+      container
+      spacing={16}
+      alignContent="flex-start"
+    >
       <Grid xs={12} sm={12} item>
         <Typography variant="h4">Orders History</Typography>
         <Typography variant="h5" gutterBottom>

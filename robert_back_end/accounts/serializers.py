@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from users.models import CustomUser
 from django.contrib.auth import authenticate
+from orders.serializers import AddressSerializer, PreferenceSerializer
 
 # user serializer
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
+    address = AddressSerializer()
+    preference = PreferenceSerializer()
     class Meta:
         model = CustomUser
         fields = '__all__'

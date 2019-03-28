@@ -18,11 +18,17 @@ const orderPersistConfig = {
   whitelist: ['order', 'total', 'form_validated']
 };
 
+const pathPersistConfig = {
+  key: 'path',
+  storage: storage,
+  whitelist: ['accountTab']
+};
+
 export default combineReducers({
   errors,
   messages,
   auth,
-  path,
+  path: persistReducer(pathPersistConfig, path),
   items,
   order: persistReducer(orderPersistConfig, order),
   orders,

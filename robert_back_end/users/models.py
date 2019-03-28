@@ -32,23 +32,8 @@ class CustomUser(AbstractUser):
     preference = models.ForeignKey(
         Preference, on_delete=models.SET_NULL, related_name="preference", blank=True, null=True)
     orders = models.ManyToManyField(Order, blank=True, related_name="order")
-    default_order = models.ForeignKey(
-        Order, on_delete=models.SET_NULL, related_name="default_order", blank=True, null=True)
     balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
 
-    @property
-    def order_tommorow_done(self):
-        newDate = datetime.date.today() + datetime.timedelta(1)
-        orders = self.order.all()
-        for D in orders:
-            if D.date == newDate and D.is_cancelled == False:
-                return D
-
-    # def order_tommorow_done_object(self):
-    #     if self.order_tommorow_done:
-    #         return "yes"
-    #     else:
-    #         return "false"
 
     def order_default_origin(self):
         items = Item.objects.all()
